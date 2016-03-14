@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DataAccessLayer;
 using System.Windows.Forms;
+using DataAccessClass;
 
 namespace TestHibernate
 {
@@ -19,14 +14,33 @@ namespace TestHibernate
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DataAccessLayer.HibernateDAL db = new DataAccessLayer.HibernateDAL();
-            textBox1.Clear();
-            string tmpText = "User login ID Returned:";
-            this.textBox1.Text = tmpText + db.GetChannelById(286).Username;
+            var db = new HibernateDAL();
+            txtDisplayChannel.Clear();
+            var tmpText = "User login ID Returned:";
+            this.txtDisplayChannel.Text = tmpText + db.GetChannelById(286).Username;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            var db = new HibernateDAL();
+            var channel = new Channel
+            {
+                 ChannelId = 199
+                 ,DateCreated = DateTime.Now
+                 ,Initialized = false
+                 ,Password = "MyPassxx5"
+                 ,Status = true
+                 ,Username = "EdselPxxx5"
+            };
+
+            db.SaveChannel(channel);
+            var tmpText = "User login ID Returned:";
+            this.txtDisplayChannel.Text = tmpText + db.GetChannelById(channel.ChannelId).Username;
 
         }
     }

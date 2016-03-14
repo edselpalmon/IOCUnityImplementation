@@ -2,7 +2,7 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccessClass" namespace="DataAccessClass">
   <class name="DataAccessClass.Channel, DataAccessClass" table="Channel">
     <id name="ChannelId" column="ChannelId" type="Int32" unsaved-value="0">
-      <generator class="native"/>
+      <generator class="assigned" />
     </id>
     <property name="Username" type="string" length="50" not-null="false"/>
     <property name="Password" type="string" length="100" not-null="true"/>
