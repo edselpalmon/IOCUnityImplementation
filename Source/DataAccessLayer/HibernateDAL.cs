@@ -1,7 +1,9 @@
 ﻿using DataAccessClass;
+using Entities;
 using NHibernate;
 using NHibernate.Cfg;
-
+using ServiceInterfaces;
+using System;
 
 namespace DataAccessLayer
 {
@@ -35,5 +37,30 @@ namespace DataAccessLayer
                 trx.Commit();
             }
         }
+
+        public IEmployeeInformation GetEmployeeById(Int64 employeeId)
+        {
+            IEmployeeInformation employee;
+
+            using (var trx = _session.BeginTransaction())
+            {
+                employee = _session.Get<EmployeeInformation>(employeeId);
+                trx.Commit();
+            }
+
+            return employee;
+        }
+
+        public Int64 SaveEmployeeInformation(IEmployeeInformation employeeInformation)
+        {
+            using (var trx = _session.BeginTransaction())
+            {
+                _session.SaveOrUpdate(employeeInformation);
+                trx.Commit();
+            }
+
+            return employeeInformation.EmployeeId;
+        }
+
     }
 }
