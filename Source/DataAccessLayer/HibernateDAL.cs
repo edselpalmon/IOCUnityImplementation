@@ -76,11 +76,19 @@ namespace DataAccessLayer
 
         public T SaveInformation<T>(T recordInformation)
         {
-            using (var trx = _session.BeginTransaction())
+            try
             {
-                _session.SaveOrUpdate(recordInformation);
-                trx.Commit();
-                return recordInformation;
+                using (var trx = _session.BeginTransaction())
+                {
+                    _session.Clear();
+                    _session.SaveOrUpdate(recordInformation);
+                    trx.Commit();
+                    return recordInformation;
+                }
+            }
+            catch (Exception exc)
+            {
+                throw new Exception(exc.Message);
             }
         }
 
