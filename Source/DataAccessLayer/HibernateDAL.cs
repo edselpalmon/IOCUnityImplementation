@@ -74,6 +74,23 @@ namespace DataAccessLayer
             }           
         }
 
+        public void DeleteRecords<T>(T recordInformation)
+        {
+            try
+            {
+                using (var trx = _session.BeginTransaction())
+                {
+                    _session.Clear();
+                    _session.Delete(recordInformation);
+                    trx.Commit();
+                }
+            }
+            catch (Exception exc)
+            {
+                throw new Exception(exc.Message);
+            }
+        }
+
         public T SaveInformation<T>(T recordInformation)
         {
             try
