@@ -7,7 +7,7 @@ using System;
 
 namespace DataAccessLayer
 {
-    public class HibernateDAL
+    public class HibernateDAL : IHibernateDAL
     {
         private ISession _session;
         
@@ -16,7 +16,7 @@ namespace DataAccessLayer
             _session = new Configuration().Configure().BuildSessionFactory().OpenSession();
 
         }
-        public Channel GetChannelById(int channelId)
+        public IChannel GetChannelById(int channelId)
         {
             var channel = new Channel();
 
@@ -29,7 +29,7 @@ namespace DataAccessLayer
             return channel;
         }
 
-        public void SaveChannel(Channel channel)
+        public void SaveChannel(IChannel channel)
         {
             using (var trx = _session.BeginTransaction())
             {
@@ -61,6 +61,29 @@ namespace DataAccessLayer
 
             return employeeInformation.EmployeeId;
         }
+
+        /*generic DAL methods*/
+        public T GetRecordsById<T>(Int64 recordId)
+        {
+
+            using (var trx = _session.BeginTransaction())
+            {
+                var records = _session.Get<T>(recordId);
+                trx.Commit();
+                return records;
+            }           
+        }
+
+        public T SaveInformation<T>(T recordInformation)
+        {
+            using (var trx = _session.BeginTransaction())
+            {
+                _session.SaveOrUpdate(recordInformation);
+                trx.Commit();
+                return recordInformation;
+            }
+        }
+
 
     }
 }

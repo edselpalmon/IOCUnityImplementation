@@ -3,11 +3,13 @@ using DataAccessLayer;
 using System.Windows.Forms;
 using DataAccessClass;
 using Entities;
+using ServiceInterfaces;
 
 namespace TestHibernate
 {
     public partial class Form1 : Form
     {
+        private IHibernateDAL _db = new HibernateDAL();
         public Form1()
         {
             InitializeComponent();
@@ -15,10 +17,9 @@ namespace TestHibernate
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var db = new HibernateDAL();
             txtDisplayChannel.Clear();
             var tmpText = "User login ID Returned:";
-            this.txtDisplayChannel.Text = tmpText + db.GetChannelById(286).Username;
+            this.txtDisplayChannel.Text = tmpText + _db.GetChannelById(286).Username;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -28,7 +29,6 @@ namespace TestHibernate
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var db = new HibernateDAL();
             var channel = new Channel
             {
                  ChannelId = 199
@@ -39,61 +39,58 @@ namespace TestHibernate
                  ,Username = "EdselPxxx5"
             };
 
-            db.SaveChannel(channel);
+            _db.SaveChannel(channel);
             var tmpText = "User login ID Returned:";
-            this.txtDisplayChannel.Text = tmpText + db.GetChannelById(channel.ChannelId).Username;
+            this.txtDisplayChannel.Text = tmpText + _db.GetChannelById(channel.ChannelId).Username;
 
         }
 
         private void btnGetEmployee_Click(object sender, EventArgs e)
         {
-            var db = new HibernateDAL();
             txtDisplayChannel.Clear();
             var tmpText ="";
-            this.txtDisplayChannel.Text = tmpText + db.GetEmployeeById(1).LastName;
+            this.txtDisplayChannel.Text = tmpText + _db.GetRecordsById<IEmployeeInformation>(1).LastName;
         }
 
         private void btnSaveEmployee_Click(object sender, EventArgs e)
         {
-            var db = new HibernateDAL();
-            var employeeInformation = new EmployeeInformation
+            IEmployeeInformation employeeInformation = new EmployeeInformation
             {
-                 FirstName = "MHIQO"
-                 ,MiddleName = "UNKNOWN"
-                 ,LastName = "TUBICE"
-                 ,BirthDate = DateTime.Parse("10/10/1982")
-                 ,CivilStatus = "S"
+                 FirstName = "ALFREDXX"
+                 ,MiddleName = "PREDOXX"
+                 ,LastName = "JARANILLAXX"
+                 ,BirthDate = DateTime.Parse("09/10/1975")
+                 ,CivilStatus = "M"
                  ,Gender = "M"
                  ,Salutation = "MR."
-                 ,Suffix = "II"
+                 ,Suffix = "III"
                  ,EducationalAttainment = "C"
             };
 
-            var employeeId = db.SaveEmployeeInformation(employeeInformation);
+            var retEmployeeInfo = _db.SaveInformation(employeeInformation);
             var tmpText = "";
-            this.txtDisplayChannel.Text = tmpText + db.GetEmployeeById(employeeId).LastName;
+            this.txtDisplayChannel.Text = tmpText + _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
         }
 
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            var db = new HibernateDAL();
-            var employeeInformation = new EmployeeInformation
+            IEmployeeInformation employeeInformation = new EmployeeInformation
             {
-                EmployeeId = 3
-                ,FirstName = "MHIQO"
-                ,MiddleName = "UNKNOWN"
-                ,LastName = "TUBICE"
-                ,BirthDate = DateTime.Parse("10/10/1982")
+                EmployeeId = 4
+                ,FirstName = "ALFREDOYY"
+                ,MiddleName = "FREDYY"
+                ,LastName = "JARANILLAYY"
+                ,BirthDate = DateTime.Parse("10/10/1975")
                 ,CivilStatus = "S"
                 ,Gender = "M"
                 ,Salutation = "MR."
-                ,Suffix = "II"
+                ,Suffix = "IV"
                 ,EducationalAttainment = "C"
             };
 
-            var employeeId = db.SaveEmployeeInformation(employeeInformation);
+            var retEmployeeInfo = _db.SaveInformation(employeeInformation);
             var tmpText = "";
-            this.txtDisplayChannel.Text = tmpText + db.GetEmployeeById(employeeId).LastName;
+            this.txtDisplayChannel.Text = tmpText + _db.GetEmployeeById(retEmployeeInfo.EmployeeId).LastName;
         }
     }
 }
