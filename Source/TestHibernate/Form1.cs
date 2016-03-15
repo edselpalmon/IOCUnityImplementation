@@ -54,43 +54,55 @@ namespace TestHibernate
 
         private void btnSaveEmployee_Click(object sender, EventArgs e)
         {
-            IEmployeeInformation employeeInformation = new EmployeeInformation
+            try
             {
-                 FirstName = "ALFREDXX"
-                 ,MiddleName = "PREDOXX"
-                 ,LastName = "JARANILLAXX"
-                 ,BirthDate = DateTime.Parse("09/10/1975")
-                 ,CivilStatus = "M"
-                 ,Gender = "M"
-                 ,Salutation = "MR."
-                 ,Suffix = "III"
-                 ,EducationalAttainment = "C"
-            };
+                IEmployeeInformation employeeInformation = new EmployeeInformation
+                {
+                      FirstName = "ALFREDXX"
+                     , MiddleName = "PREDOXX"
+                     , LastName = "JARANILLAXX"
+                     , BirthDate = DateTime.Parse("09/10/1975")
+                     , CivilStatus = "M"
+                     , Gender = "M"
+                     , Salutation = "MR."
+                     , Suffix = "III"
+                     , EducationalAttainment = "C"
+                };
 
-            var retEmployeeInfo = _db.SaveInformation(employeeInformation);
-            var tmpText = "";
-            this.txtDisplayChannel.Text = tmpText + _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
+                var retEmployeeInfo = _db.SaveInformation(employeeInformation);
+                this.txtDisplayChannel.Text = _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
+            }
+            catch (Exception exc)
+            {
+                this.txtDisplayChannel.Text = exc.Message;
+            }
         }
 
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            IEmployeeInformation employeeInformation = new EmployeeInformation
+            try
             {
-                EmployeeId = 4
-                ,FirstName = "ALFREDOYY"
-                ,MiddleName = "FREDYY"
-                ,LastName = "JARANILLAYY"
-                ,BirthDate = DateTime.Parse("10/10/1975")
-                ,CivilStatus = "S"
-                ,Gender = "M"
-                ,Salutation = "MR."
-                ,Suffix = "IV"
-                ,EducationalAttainment = "C"
-            };
+                IEmployeeInformation employeeInformation = new EmployeeInformation
+                {
+                    EmployeeId = 4
+                    , FirstName = "ALFREDO"
+                    , MiddleName = "FRED"
+                    , LastName = "JARANILLA"
+                    , BirthDate = DateTime.Parse("10/10/1975")
+                    , CivilStatus = "S"
+                    , Gender = "M"
+                    , Salutation = "MR."
+                    , Suffix = "IV"
+                    , EducationalAttainment = "C"
+                };
 
-            var retEmployeeInfo = _db.SaveInformation(employeeInformation);
-            var tmpText = "";
-            this.txtDisplayChannel.Text = tmpText + _db.GetEmployeeById(retEmployeeInfo.EmployeeId).LastName;
+                var retEmployeeInfo = _db.SaveInformation(employeeInformation);
+                this.txtDisplayChannel.Text = _db.GetEmployeeById(retEmployeeInfo.EmployeeId).LastName;
+            }
+            catch (Exception exc)
+            {
+                this.txtDisplayChannel.Text = exc.Message;
+            }
         }
     }
 }
