@@ -1,8 +1,9 @@
-﻿using System;
+﻿using ServiceInterfaces;
+using System;
 
 namespace DataAccessClass
 {
-    public class Channel
+    public class Channel : IChannel
     {
 
         //private int _ChannelId;

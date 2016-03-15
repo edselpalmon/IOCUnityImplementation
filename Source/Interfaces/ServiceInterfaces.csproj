@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="IAccounting.cs" />
     <Compile Include="IAccountingService.cs" />
+    <Compile Include="IChannel.cs" />
+    <Compile Include="IEmployeeInformation.cs" />
+    <Compile Include="IHibernateDAL.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
