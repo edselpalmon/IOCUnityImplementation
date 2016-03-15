@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceInterfaces
 {
@@ -12,6 +8,8 @@ namespace ServiceInterfaces
         void SaveChannel(IChannel channel);
         IEmployeeInformation GetEmployeeById(Int64 employeeId);
         Int64 SaveEmployeeInformation(IEmployeeInformation employeeInformation);
+
+        T OpenHibernateSession<T>(string connectionName);
 
         //generic methods
         T GetRecordsById<T>(Int64 recordId);
