@@ -16,5 +16,6 @@ namespace ServiceInterfaces
         //generic methods
         T GetRecordsById<T>(Int64 recordId);
         T SaveInformation<T>(T recordInformation);
+        void DeleteRecords<T>(T recordInformation);
     }
 }

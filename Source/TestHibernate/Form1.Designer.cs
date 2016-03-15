@@ -34,6 +34,7 @@
             this.btnGetEmployee = new System.Windows.Forms.Button();
             this.btnSaveEmployee = new System.Windows.Forms.Button();
             this.btnUpdateEmployee = new System.Windows.Forms.Button();
+            this.btnDeleteEmployee = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnGetChannel
@@ -94,11 +95,22 @@
             this.btnUpdateEmployee.UseVisualStyleBackColor = true;
             this.btnUpdateEmployee.Click += new System.EventHandler(this.btnUpdateEmployee_Click);
             // 
+            // btnDeleteEmployee
+            // 
+            this.btnDeleteEmployee.Location = new System.Drawing.Point(33, 203);
+            this.btnDeleteEmployee.Name = "btnDeleteEmployee";
+            this.btnDeleteEmployee.Size = new System.Drawing.Size(168, 23);
+            this.btnDeleteEmployee.TabIndex = 6;
+            this.btnDeleteEmployee.Text = "Delete Employee";
+            this.btnDeleteEmployee.UseVisualStyleBackColor = true;
+            this.btnDeleteEmployee.Click += new System.EventHandler(this.btnDeleteEmployee_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.btnDeleteEmployee);
             this.Controls.Add(this.btnUpdateEmployee);
             this.Controls.Add(this.btnSaveEmployee);
             this.Controls.Add(this.btnGetEmployee);
@@ -120,6 +132,7 @@
         private System.Windows.Forms.Button btnGetEmployee;
         private System.Windows.Forms.Button btnSaveEmployee;
         private System.Windows.Forms.Button btnUpdateEmployee;
+        private System.Windows.Forms.Button btnDeleteEmployee;
     }
 }
 

@@ -104,5 +104,18 @@ namespace TestHibernate
                 this.txtDisplayChannel.Text = exc.Message;
             }
         }
+
+        private void btnDeleteEmployee_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var employee = _db.GetEmployeeById(5);
+                _db.DeleteRecords(employee);
+            }
+            catch (Exception exc)
+            {
+                this.txtDisplayChannel.Text = exc.Message;
+            }
+        }
     }
 }
