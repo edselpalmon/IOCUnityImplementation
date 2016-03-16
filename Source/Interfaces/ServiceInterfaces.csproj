@@ -43,6 +43,7 @@
     <Compile Include="IAccounting.cs" />
     <Compile Include="IAccountingService.cs" />
     <Compile Include="IChannel.cs" />
+    <Compile Include="IDALSessionFactory.cs" />
     <Compile Include="IEmployeeInformation.cs" />
     <Compile Include="IHibernateDAL.cs" />
     <Compile Include="IService.cs" />

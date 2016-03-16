@@ -4,22 +4,66 @@ using NHibernate;
 using NHibernate.Cfg;
 using ServiceInterfaces;
 using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace DataAccessLayer
 {
     public class HibernateDAL : IHibernateDAL
     {
         private ISession _session;
-        
-        public HibernateDAL()
+
+        public IDictionary<string, ISessionFactory> FactorySessions { get; private set; }
+
+        //constructors
+        public HibernateDAL() //using the default connection
         {
-            _session = new Configuration().Configure().BuildSessionFactory().OpenSession();
+            //_session = new Configuration().Configure().BuildSessionFactory().OpenSession();
 
         }
+
+        public HibernateDAL(string connectionString) //using Connection string
+        {
+
+            _session = new Configuration()
+                .Configure()
+                .SetProperty("connection.connection_string", connectionString)
+                .BuildSessionFactory().OpenSession();
+
+        }
+
+        public HibernateDAL(IDbConnection conn) //using connection object
+        {
+            _session = new Configuration()
+                .Configure()
+                .BuildSessionFactory().OpenSession(conn);
+
+        }
+
+        //public methods
+
+        public T OpenHibernateSession<T>(string connectionName) //using the default connection
+        {
+            var factory = new DALSessionFactory();
+            FactorySessions = factory.CreateSessionFactory<ISessionFactory>();
+
+            foreach (var sessionFactory in FactorySessions)
+            {
+                if (connectionName == sessionFactory.Key)
+                {
+                    _session = sessionFactory.Value.OpenSession();
+                    
+                }
+            }
+
+            return (T)_session;
+
+        }
+
         public IChannel GetChannelById(int channelId)
         {
             var channel = new Channel();
-
+            
             using (var trx = _session.BeginTransaction())
             {
                 channel = _session.Get<Channel>(channelId);

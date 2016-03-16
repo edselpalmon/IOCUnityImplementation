@@ -4,19 +4,25 @@ using System.Windows.Forms;
 using DataAccessClass;
 using Entities;
 using ServiceInterfaces;
+using NHibernate;
 
 namespace TestHibernate
 {
     public partial class Form1 : Form
     {
+
         private IHibernateDAL _db = new HibernateDAL();
+
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            _db.OpenHibernateSession<ISession>("WebHookDB");
+
             txtDisplayChannel.Clear();
             var tmpText = "User login ID Returned:";
             this.txtDisplayChannel.Text = tmpText + _db.GetChannelById(286).Username;
@@ -29,6 +35,8 @@ namespace TestHibernate
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            _db.OpenHibernateSession<ISession>("WebHookDB");
+
             var channel = new Channel
             {
                  ChannelId = 199
@@ -47,6 +55,8 @@ namespace TestHibernate
 
         private void btnGetEmployee_Click(object sender, EventArgs e)
         {
+            _db.OpenHibernateSession<ISession>("HRMSDB");
+
             txtDisplayChannel.Clear();
             var tmpText ="";
             this.txtDisplayChannel.Text = tmpText + _db.GetRecordsById<IEmployeeInformation>(1).LastName;
@@ -56,6 +66,8 @@ namespace TestHibernate
         {
             try
             {
+                _db.OpenHibernateSession<ISession>("HRMSDB");
+
                 IEmployeeInformation employeeInformation = new EmployeeInformation
                 {
                       FirstName = "ALFREDXX"
@@ -82,6 +94,8 @@ namespace TestHibernate
         {
             try
             {
+                _db.OpenHibernateSession<ISession>("HRMSDB");
+
                 IEmployeeInformation employeeInformation = new EmployeeInformation
                 {
                     EmployeeId = 4
@@ -109,6 +123,8 @@ namespace TestHibernate
         {
             try
             {
+                _db.OpenHibernateSession<ISession>("HRMSDB");
+
                 var employee = _db.GetEmployeeById(5);
                 _db.DeleteRecords(employee);
             }
