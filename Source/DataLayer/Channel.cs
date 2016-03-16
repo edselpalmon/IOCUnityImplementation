@@ -13,16 +13,5 @@ namespace DataAccessClass
         public virtual DateTime DateCreated { get; set; }
         public virtual bool Initialized { get; set; }
 
-    }
-
-
-    public interface IChannelX
-    {
-        int ChannelId { get; set; }
-        string Username { get; set; }
-        string Password { get; set; }
-        bool Status { get; set; }
-        DateTime DateCreated { get; set; }
-        bool Initialized { get; set; }
-    }
+    }   
 }
