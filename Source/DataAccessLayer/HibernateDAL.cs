@@ -62,15 +62,16 @@ namespace DataAccessLayer
 
         public IChannel GetChannelById(int channelId)
         {
-            var channel = new Channel();
-            
+            IChannel channel;
+
             using (var trx = _session.BeginTransaction())
             {
-                channel = _session.Get<Channel>(channelId);
+                channel = _session.Get<IChannel>(channelId);
                 trx.Commit();
             }
 
             return channel;
+
         }
 
         public void SaveChannel(IChannel channel)
@@ -88,7 +89,7 @@ namespace DataAccessLayer
 
             using (var trx = _session.BeginTransaction())
             {
-                employee = _session.Get<EmployeeInformation>(employeeId);
+                employee = _session.Get<IEmployeeInformation>(employeeId);
                 trx.Commit();
             }
 
