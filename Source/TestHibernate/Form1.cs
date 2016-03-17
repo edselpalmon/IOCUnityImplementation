@@ -5,6 +5,7 @@ using DataAccessClass;
 using Entities;
 using ServiceInterfaces;
 using NHibernate;
+using System.Collections.Generic;
 
 namespace TestHibernate
 {
@@ -59,7 +60,7 @@ namespace TestHibernate
 
             txtDisplayChannel.Clear();
             var tmpText ="";
-            this.txtDisplayChannel.Text = tmpText + _db.GetRecordsById<IEmployeeInformation>(1).LastName;
+            this.txtDisplayChannel.Text = tmpText + _db.GetRecordsById<IEmployeeInformation>(3).LastName;
         }
 
         private void btnSaveEmployee_Click(object sender, EventArgs e)
@@ -68,18 +69,35 @@ namespace TestHibernate
             {
                 _db.OpenHibernateSession<ISession>("HRMSDB");
 
+                //this will create both EmployeeInformation and addresses
+
                 IEmployeeInformation employeeInformation = new EmployeeInformation
                 {
-                      FirstName = "ALFREDXX"
+                    FirstName = "YYYYYYY"
                      , MiddleName = "PREDOXX"
-                     , LastName = "JARANILLAXX"
+                     , LastName = "YYYYYYYY"
                      , BirthDate = DateTime.Parse("09/10/1975")
                      , CivilStatus = "M"
                      , Gender = "M"
                      , Salutation = "MR."
                      , Suffix = "III"
                      , EducationalAttainment = "C"
+                     , EmployeeAddresses = new List<IEmployeeAddress>()
                 };
+
+                var EmployeeAddresses = new EmployeeAddress
+                {
+                    AddressLine1 = "XUpdated Addr1"
+                    , AddressLine2 = "XUpdated Addr2"
+                    , City = "Pasig"
+                    , PostalCode = "1609"
+                    , Province = "MyProvince"
+                    , State = "MyState"
+                    , Country = "Philippines"
+                    , EmployeeInformation = employeeInformation
+                };
+                
+                employeeInformation.EmployeeAddresses.Add(EmployeeAddresses);
 
                 var retEmployeeInfo = _db.SaveInformation(employeeInformation);
                 this.txtDisplayChannel.Text = _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
@@ -95,23 +113,45 @@ namespace TestHibernate
             try
             {
                 _db.OpenHibernateSession<ISession>("HRMSDB");
+             
+                //this will update employeeinfo and add the addresses   
+               
+                var employeeInformation = _db.GetRecordsById<IEmployeeInformation>(3); //_db.LoadRecordInfo<IEmployeeInformation>(3); alternative
+                employeeInformation.FirstName = "WAKAKAUlit";
 
-                IEmployeeInformation employeeInformation = new EmployeeInformation
-                {
-                    EmployeeId = 4
-                    , FirstName = "ALFREDO"
-                    , MiddleName = "FRED"
-                    , LastName = "JARANILLA"
-                    , BirthDate = DateTime.Parse("10/10/1975")
-                    , CivilStatus = "S"
-                    , Gender = "M"
-                    , Salutation = "MR."
-                    , Suffix = "IV"
-                    , EducationalAttainment = "C"
+                var employeeAddress = new EmployeeAddress
+                    {
+                        EmployeeId = employeeInformation.EmployeeId
+                      , AddressLine1 = "Updatedx Addr1"
+                      , AddressLine2 = "Updatedx Addr2"
+                      , City = "Pasig"
+                      , PostalCode = "1609"
+                      , Province = "MyProvince"
+                      , State = "MyState"
+                      , Country = "Philippines"
+                      , EmployeeInformation = employeeInformation
                 };
+                employeeInformation.EmployeeAddresses.Add(employeeAddress);
+
+                employeeAddress = new EmployeeAddress
+                    {
+                        EmployeeId = employeeInformation.EmployeeId
+                      , AddressLine1 = "Updatedxxxx Addr1"
+                      , AddressLine2 = "Updatedxxxxx Addr2"
+                      , City = "Pasig"
+                      , PostalCode = "1609"
+                      , Province = "MyProvince"
+                      , State = "MyState"
+                      , Country = "Philippines"
+                      , EmployeeInformation = employeeInformation
+                };
+                
+                employeeInformation.EmployeeAddresses.Add(employeeAddress);
 
                 var retEmployeeInfo = _db.SaveInformation(employeeInformation);
-                this.txtDisplayChannel.Text = _db.GetEmployeeById(retEmployeeInfo.EmployeeId).LastName;
+                this.txtDisplayChannel.Text = _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
+
+
             }
             catch (Exception exc)
             {
@@ -125,7 +165,7 @@ namespace TestHibernate
             {
                 _db.OpenHibernateSession<ISession>("HRMSDB");
 
-                var employee = _db.GetEmployeeById(5);
+                var employee = _db.GetRecordsById<IEmployeeInformation>(5);
                 _db.DeleteRecords(employee);
             }
             catch (Exception exc)

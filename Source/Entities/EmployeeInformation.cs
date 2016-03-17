@@ -1,5 +1,6 @@
 ﻿using ServiceInterfaces;
 using System;
+using System.Collections.Generic;
 
 namespace Entities
 {
@@ -16,5 +17,6 @@ namespace Entities
         public virtual string Gender { get; set; }
         public virtual string CivilStatus { get; set; }
         public virtual string EducationalAttainment { get; set; }
+        public virtual IList<IEmployeeAddress> EmployeeAddresses { get; set; }
     }
 }

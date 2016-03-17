@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ServiceInterfaces
 {
@@ -15,5 +16,6 @@ namespace ServiceInterfaces
         string Gender { get; set; }
         string CivilStatus { get; set; }
         string EducationalAttainment { get; set; }
+        IList<IEmployeeAddress> EmployeeAddresses { get; set; }
     }
 }

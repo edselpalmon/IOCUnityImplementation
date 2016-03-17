@@ -125,8 +125,8 @@ namespace DataAccessLayer
             {
                 using (var trx = _session.BeginTransaction())
                 {
-                    _session.Clear();
                     _session.Delete(recordInformation);
+                    _session.Flush();
                     trx.Commit();
                 }
             }
@@ -142,8 +142,8 @@ namespace DataAccessLayer
             {
                 using (var trx = _session.BeginTransaction())
                 {
-                    _session.Clear();
                     _session.SaveOrUpdate(recordInformation);
+                    _session.Flush();
                     trx.Commit();
                     return recordInformation;
                 }
@@ -151,6 +151,17 @@ namespace DataAccessLayer
             catch (Exception exc)
             {
                 throw new Exception(exc.Message);
+            }
+        }
+
+        public T LoadRecordInfo<T>(Int64 recordId)
+        {
+
+            using (var trx = _session.BeginTransaction())
+            {
+                var records = _session.Load<T>(recordId);
+                trx.Commit();
+                return records;
             }
         }
 

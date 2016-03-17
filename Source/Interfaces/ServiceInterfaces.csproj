@@ -44,6 +44,7 @@
     <Compile Include="IAccountingService.cs" />
     <Compile Include="IChannel.cs" />
     <Compile Include="IDALSessionFactory.cs" />
+    <Compile Include="IEmployeeAddress.cs" />
     <Compile Include="IEmployeeInformation.cs" />
     <Compile Include="IHibernateDAL.cs" />
     <Compile Include="IService.cs" />
