@@ -1,4 +1,5 @@
-﻿using IOCFactory;
+﻿using Entities;
+using IOCFactory;
 using NHibernate;
 using ServiceInterfaces;
 using System;
@@ -20,6 +21,8 @@ namespace HRMS
         {
 
             _db.OpenHibernateSession<ISession>("HRMSDB");
+
+            var test = _db.GetRecordsById<ITestTable>(1);
 
             var employeeInformation = _db.GetRecordsById<IEmployeeInformation>(64);
 

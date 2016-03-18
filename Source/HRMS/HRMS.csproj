@@ -93,6 +93,10 @@
       <Project>{bd0272ad-cf2d-49f2-9beb-fd4f1092a37a}</Project>
       <Name>IOCFactory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{6ad85501-d3eb-44d6-900e-ccc2f9bcf7d8}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\ServiceInterfaces.csproj">
       <Project>{faa61a43-6429-4041-a140-86094afaf2fd}</Project>
       <Name>ServiceInterfaces</Name>

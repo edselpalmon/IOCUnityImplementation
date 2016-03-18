@@ -114,7 +114,6 @@ namespace DataAccessLayer
 
         public T GetRecordsById<T>(Int64 recordId)
         {
-
             using (var trx = _session.BeginTransaction())
             {
                 var records = _session.Get<T>(recordId);

@@ -47,6 +47,7 @@ namespace IOCFactory
             container.RegisterType<IEmployeeAddress, EmployeeAddress>("EmployeeAddress", new ContainerControlledLifetimeManager());
             container.RegisterType<IEmployementHistory, EmployementHistory>("EmployementHistory", new ContainerControlledLifetimeManager());
             container.RegisterType<IEducationalBackground, EducationalBackground>("EducationalBackground", new ContainerControlledLifetimeManager());
+            container.RegisterType<ITestTable, TestTable>("TestTable", new ContainerControlledLifetimeManager());
 
             //DAL
             container.RegisterType<IDALSessionFactory, DALSessionFactory>("DALSessionFactory", new ContainerControlledLifetimeManager());
