@@ -44,7 +44,10 @@
     <Compile Include="IAccountingService.cs" />
     <Compile Include="IChannel.cs" />
     <Compile Include="IDALSessionFactory.cs" />
+    <Compile Include="IEducationalBackground.cs" />
+    <Compile Include="IEmployeeAddress.cs" />
     <Compile Include="IEmployeeInformation.cs" />
+    <Compile Include="IEmployementHistory.cs" />
     <Compile Include="IHibernateDAL.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Entities" namespace="Entities">
+  <class name="Entities.EmployeeInformation, Entities" table="EmployeeInformation">
+    <id name="EmployeeId" column="EmployeeId" type="Int64" unsaved-value="0">
+      <generator class="identity" />
+    </id>
+    <property name="EmployeeNumber" type="string" update="false" insert="false"/>
+    <property name="Salutation" type="string" length="100" not-null="true"/>
+    <property name="FirstName" type="string" length="100" not-null="false"/>
+    <property name="MiddleName" type="string" length="100" not-null="false"/>
+    <property name="LastName" type="string" length="100" not-null="false"/>
+    <property name="Suffix" type="string" length="100" not-null="true"/>
+    <property name="BirthDate" type="DateTime" not-null="false"/>
+    <property name="Gender" type="string" length="1" not-null="false"/>
+    <property name="CivilStatus" type="string" length="1" not-null="false"/>
+    <property name="EducationalAttainment" type="string" length="1" not-null="true"/>
+    
+    <bag name="EmployeeAddresses" inverse="true" lazy="true" cascade="all">
+      <key column="EmployeeId" />
+      <one-to-many class="Entities.EmployeeAddress"/>
+    </bag>
+  
+    <bag name="EmployementHistories" inverse="true" lazy="true" cascade="all">
+      <key column="EmployeeId" />
+      <one-to-many class="Entities.EmployementHistory"/>
+    </bag>
+
+    <bag name="EducationalBackgrounds" inverse="true" lazy="true" cascade="all">
+      <key column="EmployeeId" />
+      <one-to-many class="Entities.EducationalBackground"/>
+    </bag>
+  
+  </class>
+</hibernate-mapping>

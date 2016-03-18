@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Entities" namespace="Entities">
+  <class name="Entities.EmployementHistory, Entities" table="EmployementHistory" dynamic-update="true">
+    <id name="EmployementHistoryId" column="EmployementHistoryId" type="Int64" unsaved-value="0">
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="string" length="100" not-null="true"/>
+    <property name="CompanyAddress" type="string" length="300" not-null="false"/>
+    <property name="StartDate" type="DateTime" not-null="false"/>
+    <property name="EndDate" type="DateTime" not-null="false"/>
+    <property name="LastPositionHeld" type="string" length="50" not-null="false"/>
+    <property name="Industry" type="string" length="50" not-null="true"/>
+    <many-to-one name="EmployeeInformation" class="Entities.EmployeeInformation" column="EmployeeId" cascade="all"/>
+  </class>
+</hibernate-mapping>
+

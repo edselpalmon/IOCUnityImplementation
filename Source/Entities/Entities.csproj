@@ -49,7 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting.cs" />
+    <Compile Include="EducationalBackground.cs" />
     <Compile Include="EmployeeInformation.cs" />
+    <Compile Include="EmployeeAddress.cs" />
+    <Compile Include="EmployementHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,7 +65,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EmployeeInformation.hbm.xml" />
+    <EmbeddedResource Include="NHibernateMapping\EducationalBackground.hbm.xml" />
+    <EmbeddedResource Include="NHibernateMapping\EmployeeInformation.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NHibernateMapping\EmployeeAddress.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NHibernateMapping\EmployementHistory.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
