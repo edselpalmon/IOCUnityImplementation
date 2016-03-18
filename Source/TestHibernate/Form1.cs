@@ -1,18 +1,18 @@
 ﻿using System;
-using DataAccessLayer;
 using System.Windows.Forms;
 using DataAccessClass;
 using Entities;
 using ServiceInterfaces;
 using NHibernate;
 using System.Collections.Generic;
+using IOCFactory;
 
 namespace TestHibernate
 {
     public partial class Form1 : Form
     {
 
-        private IHibernateDAL _db = new HibernateDAL();
+        private IHibernateDAL _db = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
 
         public Form1()
         {

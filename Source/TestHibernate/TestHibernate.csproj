@@ -103,6 +103,10 @@
       <Project>{83fb25df-eaa1-40a4-8d6f-b08a202a304d}</Project>
       <Name>DataAccessClass</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DependencyFactory\IOCFactory.csproj">
+      <Project>{bd0272ad-cf2d-49f2-9beb-fd4f1092a37a}</Project>
+      <Name>IOCFactory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{6ad85501-d3eb-44d6-900e-ccc2f9bcf7d8}</Project>
       <Name>Entities</Name>

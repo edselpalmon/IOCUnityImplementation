@@ -1,6 +1,4 @@
-﻿using DataAccessClass;
-using Entities;
-using NHibernate;
+﻿using NHibernate;
 using NHibernate.Cfg;
 using ServiceInterfaces;
 using System;
@@ -12,16 +10,18 @@ namespace DataAccessLayer
     public class HibernateDAL : IHibernateDAL
     {
         private ISession _session;
+        private IDALSessionFactory _factory;
 
         public IDictionary<string, ISessionFactory> FactorySessions { get; private set; }
 
-        //constructors
-        public HibernateDAL() //using the default connection
+        #region constructors
+
+        public HibernateDAL(IDALSessionFactory factory) //contructor to be used for multiple db sources then call OpenHibernateSession  
         {
-            //_session = new Configuration().Configure().BuildSessionFactory().OpenSession();
+            _factory = factory;
 
         }
-
+        
         public HibernateDAL(string connectionString) //using Connection string
         {
 
@@ -40,25 +40,9 @@ namespace DataAccessLayer
 
         }
 
-        //public methods
+        #endregion
 
-        public T OpenHibernateSession<T>(string connectionName) //using the default connection
-        {
-            var factory = new DALSessionFactory();
-            FactorySessions = factory.CreateSessionFactory<ISessionFactory>();
-
-            foreach (var sessionFactory in FactorySessions)
-            {
-                if (connectionName == sessionFactory.Key)
-                {
-                    _session = sessionFactory.Value.OpenSession();
-                    
-                }
-            }
-
-            return (T)_session;
-
-        }
+        #region public methods
 
         public IChannel GetChannelById(int channelId)
         {
@@ -107,7 +91,27 @@ namespace DataAccessLayer
             return employeeInformation.EmployeeId;
         }
 
-        /*generic DAL methods*/
+        #endregion
+
+        #region public generic DAL methods
+
+        public T OpenHibernateSession<T>(string connectionName) 
+        {
+            FactorySessions = _factory.CreateSessionFactory<ISessionFactory>();
+
+            foreach (var sessionFactory in FactorySessions)
+            {
+                if (connectionName == sessionFactory.Key)
+                {
+                    _session = sessionFactory.Value.OpenSession();
+
+                }
+            }
+
+            return (T)_session;
+
+        }
+
         public T GetRecordsById<T>(Int64 recordId)
         {
 
@@ -164,7 +168,8 @@ namespace DataAccessLayer
                 return records;
             }
         }
-
+        
+        #endregion
 
     }
 }
