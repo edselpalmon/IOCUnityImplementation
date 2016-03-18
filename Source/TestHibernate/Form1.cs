@@ -58,7 +58,7 @@ namespace TestHibernate
         {
             _db.OpenHibernateSession<ISession>("HRMSDB");
 
-            var id = int.Parse(txtDisplayChannel.Text);
+            var id = Int64.Parse(txtDisplayChannel.Text);
             txtDisplayChannel.Clear();
             var tmpText ="";
             this.txtDisplayChannel.Text = tmpText + _db.GetRecordsById<IEmployeeInformation>(id).LastName;
@@ -140,10 +140,12 @@ namespace TestHibernate
             try
             {
                 _db.OpenHibernateSession<ISession>("HRMSDB");
-             
+
                 //this will update employeeinfo, addresses, educational background and employement history
-                               
-                var employeeInformation = _db.GetRecordsById<IEmployeeInformation>(3); //_db.LoadRecordInfo<IEmployeeInformation>(3); alternative
+
+                var id = Int64.Parse(txtDisplayChannel.Text);
+
+                var employeeInformation = _db.GetRecordsById<IEmployeeInformation>(id); //_db.LoadRecordInfo<IEmployeeInformation>(3); alternative
                 employeeInformation.FirstName = "WAKAKAUlit";
 
                 var employeeAddress = new EmployeeAddress
@@ -203,7 +205,9 @@ namespace TestHibernate
             {
                 _db.OpenHibernateSession<ISession>("HRMSDB");
 
-                var employee = _db.GetRecordsById<IEmployeeInformation>(5);
+                var id = Int64.Parse(txtDisplayChannel.Text);
+
+                var employee = _db.GetRecordsById<IEmployeeInformation>(id);
                 _db.DeleteRecords(employee);
             }
             catch (Exception exc)
