@@ -18,5 +18,6 @@ namespace Entities
         public virtual string CivilStatus { get; set; }
         public virtual string EducationalAttainment { get; set; }
         public virtual IList<IEmployeeAddress> EmployeeAddresses { get; set; }
+        public virtual IList<IEmployementHistory> EmployementHistories { get; set; }
     }
 }

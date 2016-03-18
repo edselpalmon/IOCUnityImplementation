@@ -51,6 +51,7 @@
     <Compile Include="Accounting.cs" />
     <Compile Include="EmployeeInformation.cs" />
     <Compile Include="EmployeeAddress.cs" />
+    <Compile Include="EmployementHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NHibernateMapping\EmployeeAddress.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NHibernateMapping\EmployementHistory.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

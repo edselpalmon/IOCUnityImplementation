@@ -17,5 +17,6 @@ namespace ServiceInterfaces
         string CivilStatus { get; set; }
         string EducationalAttainment { get; set; }
         IList<IEmployeeAddress> EmployeeAddresses { get; set; }
+        IList<IEmployementHistory> EmployementHistories { get; set; }
     }
 }

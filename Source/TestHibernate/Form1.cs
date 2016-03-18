@@ -58,9 +58,10 @@ namespace TestHibernate
         {
             _db.OpenHibernateSession<ISession>("HRMSDB");
 
+            var id = int.Parse(txtDisplayChannel.Text);
             txtDisplayChannel.Clear();
             var tmpText ="";
-            this.txtDisplayChannel.Text = tmpText + _db.GetRecordsById<IEmployeeInformation>(3).LastName;
+            this.txtDisplayChannel.Text = tmpText + _db.GetRecordsById<IEmployeeInformation>(id).LastName;
         }
 
         private void btnSaveEmployee_Click(object sender, EventArgs e)
@@ -69,13 +70,13 @@ namespace TestHibernate
             {
                 _db.OpenHibernateSession<ISession>("HRMSDB");
 
-                //this will create both EmployeeInformation and addresses
+                //this will create both EmployeeInformation, addresses, and employement history
 
                 IEmployeeInformation employeeInformation = new EmployeeInformation
                 {
-                    FirstName = "YYYYYYY"
-                     , MiddleName = "PREDOXX"
-                     , LastName = "YYYYYYYY"
+                    FirstName = "LATESTTEST"
+                     , MiddleName = "ZZZZZZ"
+                     , LastName = "ZZZZZZ"
                      , BirthDate = DateTime.Parse("09/10/1975")
                      , CivilStatus = "M"
                      , Gender = "M"
@@ -83,12 +84,13 @@ namespace TestHibernate
                      , Suffix = "III"
                      , EducationalAttainment = "C"
                      , EmployeeAddresses = new List<IEmployeeAddress>()
+                     , EmployementHistories = new List<IEmployementHistory>()
                 };
 
-                var EmployeeAddresses = new EmployeeAddress
+                var employeeAddress = new EmployeeAddress
                 {
-                    AddressLine1 = "XUpdated Addr1"
-                    , AddressLine2 = "XUpdated Addr2"
+                    AddressLine1 = "Latest Addr1"
+                    , AddressLine2 = "Latest Addr2"
                     , City = "Pasig"
                     , PostalCode = "1609"
                     , Province = "MyProvince"
@@ -96,8 +98,20 @@ namespace TestHibernate
                     , Country = "Philippines"
                     , EmployeeInformation = employeeInformation
                 };
+
+                var employementHistory = new EmployementHistory
+                {
+                    CompanyAddress = "CompanyAddr"
+                    , CompanyName = "Company Name"
+                    , EndDate = DateTime.Parse("10/11/2015")
+                    , StartDate = DateTime.Parse("03/11/2011")
+                    , Industry = "Industry"
+                    , LastPositionHeld = "System Analyst"
+                    , EmployeeInformation = employeeInformation
+                };
                 
-                employeeInformation.EmployeeAddresses.Add(EmployeeAddresses);
+                employeeInformation.EmployeeAddresses.Add(employeeAddress);
+                employeeInformation.EmployementHistories.Add(employementHistory);
 
                 var retEmployeeInfo = _db.SaveInformation(employeeInformation);
                 this.txtDisplayChannel.Text = _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
@@ -114,15 +128,14 @@ namespace TestHibernate
             {
                 _db.OpenHibernateSession<ISession>("HRMSDB");
              
-                //this will update employeeinfo and add the addresses   
-               
+                //this will update employeeinfo, addresses, and employement history
+                               
                 var employeeInformation = _db.GetRecordsById<IEmployeeInformation>(3); //_db.LoadRecordInfo<IEmployeeInformation>(3); alternative
                 employeeInformation.FirstName = "WAKAKAUlit";
 
                 var employeeAddress = new EmployeeAddress
                     {
-                        EmployeeId = employeeInformation.EmployeeId
-                      , AddressLine1 = "Updatedx Addr1"
+                      AddressLine1 = "Updatedx Addr1"
                       , AddressLine2 = "Updatedx Addr2"
                       , City = "Pasig"
                       , PostalCode = "1609"
@@ -135,8 +148,7 @@ namespace TestHibernate
 
                 employeeAddress = new EmployeeAddress
                     {
-                        EmployeeId = employeeInformation.EmployeeId
-                      , AddressLine1 = "Updatedxxxx Addr1"
+                      AddressLine1 = "Updatedxxxx Addr1"
                       , AddressLine2 = "Updatedxxxxx Addr2"
                       , City = "Pasig"
                       , PostalCode = "1609"
@@ -147,6 +159,19 @@ namespace TestHibernate
                 };
                 
                 employeeInformation.EmployeeAddresses.Add(employeeAddress);
+
+                var employementHistory = new EmployementHistory
+                {
+                    CompanyAddress = "CompanyAddr"
+                    , CompanyName = "Company Name"
+                    , EndDate = DateTime.Parse("10/11/2015")
+                    , StartDate = DateTime.Parse("03/11/2011")
+                    , Industry = "Industry"
+                    , LastPositionHeld = "System Analyst"
+                    , EmployeeInformation = employeeInformation
+                };
+
+                employeeInformation.EmployementHistories.Add(employementHistory);
 
                 var retEmployeeInfo = _db.SaveInformation(employeeInformation);
                 this.txtDisplayChannel.Text = _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;

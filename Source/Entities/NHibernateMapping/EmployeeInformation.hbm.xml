@@ -14,9 +14,16 @@
     <property name="Gender" type="string" length="1" not-null="false"/>
     <property name="CivilStatus" type="string" length="1" not-null="false"/>
     <property name="EducationalAttainment" type="string" length="1" not-null="true"/>
+    
     <bag name="EmployeeAddresses" inverse="true" lazy="true" cascade="all">
-      <key column="AddressId" />
+      <key column="EmployeeId" />
       <one-to-many class="Entities.EmployeeAddress"/>
     </bag>
+  
+    <bag name="EmployementHistories" inverse="true" lazy="true" cascade="all">
+      <key column="EmployeeId" />
+      <one-to-many class="Entities.EmployementHistory"/>
+    </bag>
+  
   </class>
 </hibernate-mapping>

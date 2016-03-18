@@ -9,7 +9,6 @@ namespace ServiceInterfaces
     public interface IEmployeeAddress
     {
         Int64 AddressId { get; set; }
-        Int64 EmployeeId { get; set; }
         string AddressLine1 { get; set; }
         string AddressLine2 { get; set; }
         string City { get; set; }

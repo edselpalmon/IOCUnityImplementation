@@ -10,7 +10,6 @@ namespace Entities
     public class EmployeeAddress : IEmployeeAddress
     {
         public virtual Int64 AddressId { get; set; }
-        public virtual Int64 EmployeeId { get; set; }
         public virtual string AddressLine1 { get; set; }
         public virtual string AddressLine2 { get; set; }
         public virtual string City { get; set; }
