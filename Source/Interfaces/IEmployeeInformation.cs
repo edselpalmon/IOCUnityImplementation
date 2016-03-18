@@ -18,5 +18,6 @@ namespace ServiceInterfaces
         string EducationalAttainment { get; set; }
         IList<IEmployeeAddress> EmployeeAddresses { get; set; }
         IList<IEmployementHistory> EmployementHistories { get; set; }
+        IList<IEducationalBackground> EducationalBackgrounds { get; set; }
     }
 }

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting.cs" />
+    <Compile Include="EducationalBackground.cs" />
     <Compile Include="EmployeeInformation.cs" />
     <Compile Include="EmployeeAddress.cs" />
     <Compile Include="EmployementHistory.cs" />
@@ -64,6 +65,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="NHibernateMapping\EducationalBackground.hbm.xml" />
     <EmbeddedResource Include="NHibernateMapping\EmployeeInformation.hbm.xml" />
   </ItemGroup>
   <ItemGroup>

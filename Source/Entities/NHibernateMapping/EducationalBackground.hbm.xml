@@ -1,15 +1,15 @@
-﻿<!--<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Entities" namespace="Entities">
-  <class name="Entities.EmployementHistory, Entities" table="EmployementHistory" dynamic-update="true">
-    <id name="EmployementHistoryId" column="EmployementHistoryId" type="Int64" unsaved-value="0">
+  <class name="Entities.EducationalBackground, Entities" table="EducationalBackground" dynamic-update="true">
+    <id name="EducationId" column="EducationId" type="Int64" unsaved-value="0">
       <generator class="identity" />
     </id>
-    <property name="CompanyName" type="string" length="100" not-null="true"/>
-    <property name="CompanyAddress" type="string" length="300" not-null="false"/>
-    <property name="StartDate" type="DateTime" not-null="false"/>
-    <property name="EndDate" type="DateTime" not-null="false"/>
-    <property name="LastPositionHeld" type="string" length="50" not-null="false"/>
-    <property name="Industry" type="string" length="50" not-null="true"/>
+    <property name="SchoolCode" type="string" length="50" not-null="false"/>
+    <property name="SchoolName" type="string" length="100" not-null="false"/>
+    <property name="SchoolAddress" type="string" length="100" not-null="false"/>
+    <property name="DateAttended" type="DateTime" not-null="false"/>
+    <property name="DateGraduated" type="DateTime" not-null="false"/>
+    <property name="Degree" type="string" length="50" not-null="false"/>
     <many-to-one name="EmployeeInformation" class="Entities.EmployeeInformation" column="EmployeeId" cascade="all"/>
   </class>
-</hibernate-mapping>-->
+</hibernate-mapping>

@@ -70,13 +70,13 @@ namespace TestHibernate
             {
                 _db.OpenHibernateSession<ISession>("HRMSDB");
 
-                //this will create both EmployeeInformation, addresses, and employement history
+                //this will create both EmployeeInformation, addresses, educational backgrounds and employement history
 
                 IEmployeeInformation employeeInformation = new EmployeeInformation
                 {
-                    FirstName = "LATESTTEST"
-                     , MiddleName = "ZZZZZZ"
-                     , LastName = "ZZZZZZ"
+                    FirstName = "EDUCTEST"
+                     , MiddleName = "EDUCTEST"
+                     , LastName = "EDUCTEST"
                      , BirthDate = DateTime.Parse("09/10/1975")
                      , CivilStatus = "M"
                      , Gender = "M"
@@ -85,6 +85,7 @@ namespace TestHibernate
                      , EducationalAttainment = "C"
                      , EmployeeAddresses = new List<IEmployeeAddress>()
                      , EmployementHistories = new List<IEmployementHistory>()
+                     , EducationalBackgrounds = new List<IEducationalBackground>()
                 };
 
                 var employeeAddress = new EmployeeAddress
@@ -109,9 +110,21 @@ namespace TestHibernate
                     , LastPositionHeld = "System Analyst"
                     , EmployeeInformation = employeeInformation
                 };
+
+                var educationalBackground = new EducationalBackground
+                {
+                     SchoolCode = "PUP"
+                    , SchoolName = "Polytechnic University of the Philippines"
+                    , SchoolAddress = "Sta. Mesa, Manila"
+                    , Degree = "BSCoE"
+                    , DateAttended = DateTime.Parse("06/01/1992")
+                    , DateGraduated = DateTime.Parse("03/31/1997")
+                    , EmployeeInformation = employeeInformation
+                };
                 
                 employeeInformation.EmployeeAddresses.Add(employeeAddress);
                 employeeInformation.EmployementHistories.Add(employementHistory);
+                employeeInformation.EducationalBackgrounds.Add(educationalBackground);
 
                 var retEmployeeInfo = _db.SaveInformation(employeeInformation);
                 this.txtDisplayChannel.Text = _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
@@ -128,25 +141,12 @@ namespace TestHibernate
             {
                 _db.OpenHibernateSession<ISession>("HRMSDB");
              
-                //this will update employeeinfo, addresses, and employement history
+                //this will update employeeinfo, addresses, educational background and employement history
                                
                 var employeeInformation = _db.GetRecordsById<IEmployeeInformation>(3); //_db.LoadRecordInfo<IEmployeeInformation>(3); alternative
                 employeeInformation.FirstName = "WAKAKAUlit";
 
                 var employeeAddress = new EmployeeAddress
-                    {
-                      AddressLine1 = "Updatedx Addr1"
-                      , AddressLine2 = "Updatedx Addr2"
-                      , City = "Pasig"
-                      , PostalCode = "1609"
-                      , Province = "MyProvince"
-                      , State = "MyState"
-                      , Country = "Philippines"
-                      , EmployeeInformation = employeeInformation
-                };
-                employeeInformation.EmployeeAddresses.Add(employeeAddress);
-
-                employeeAddress = new EmployeeAddress
                     {
                       AddressLine1 = "Updatedxxxx Addr1"
                       , AddressLine2 = "Updatedxxxxx Addr2"
@@ -172,6 +172,19 @@ namespace TestHibernate
                 };
 
                 employeeInformation.EmployementHistories.Add(employementHistory);
+
+                var educationalBackground = new EducationalBackground
+                {
+                     SchoolCode = "PUP"
+                    , SchoolName = "Polytechnic University of the Philippines"
+                    , SchoolAddress = "Sta. Mesa, Manila"
+                    , Degree = "BSCoE"
+                    , DateAttended = DateTime.Parse("06/01/1992")
+                    , DateGraduated = DateTime.Parse("03/31/1997")
+                    , EmployeeInformation = employeeInformation
+                };
+
+                employeeInformation.EducationalBackgrounds.Add(educationalBackground);
 
                 var retEmployeeInfo = _db.SaveInformation(employeeInformation);
                 this.txtDisplayChannel.Text = _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;

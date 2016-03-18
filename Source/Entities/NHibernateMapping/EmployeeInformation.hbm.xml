@@ -24,6 +24,11 @@
       <key column="EmployeeId" />
       <one-to-many class="Entities.EmployementHistory"/>
     </bag>
+
+    <bag name="EducationalBackgrounds" inverse="true" lazy="true" cascade="all">
+      <key column="EmployeeId" />
+      <one-to-many class="Entities.EducationalBackground"/>
+    </bag>
   
   </class>
 </hibernate-mapping>
