@@ -60,10 +60,19 @@
     <Compile Include="frm201File.Designer.cs">
       <DependentUpon>frm201File.cs</DependentUpon>
     </Compile>
+    <Compile Include="HRMSMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HRMSMain.Designer.cs">
+      <DependentUpon>HRMSMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frm201File.resx">
       <DependentUpon>frm201File.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HRMSMain.resx">
+      <DependentUpon>HRMSMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
