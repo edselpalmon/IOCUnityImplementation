@@ -23,6 +23,12 @@ namespace HRMS
             _db.OpenHibernateSession<ISession>("HRMSDB");
 
             var test = _db.GetRecordsById<ITestTable>(1);
+            var testtbl = new TestTable
+            {
+                TestDesc = "jjdhkasdh",
+                TestName = "xxxxxx"
+            };
+            _db.SaveInformation<ITestTable>(testtbl);
 
             var employeeInformation = _db.GetRecordsById<IEmployeeInformation>(64);
 

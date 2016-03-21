@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Entities
+namespace ServiceInterfaces
 {
     public interface ITestTable
     {
