@@ -21,16 +21,19 @@ namespace HRMS
 
         private void btnEmployeeSearch_Click(object sender, EventArgs e)
         {
+            var allTestTable = _dal.GetRecords<ITestTable>();
+            var allEmployee = _dal.GetRecords<IEmployeeInformation>();
 
-            var test = _dal.GetRecordsById<ITestTable>(1);
+
+            var test = _dal.GetRecordById<ITestTable>(1);
             var testtbl = new TestTable
             {
                 TestDesc = "jjdhkasdh",
                 TestName = "xxxxxx"
             };
-            _dal.SaveInformation<ITestTable>(testtbl);
+            _dal.SaveRecord<ITestTable>(testtbl);
 
-            var employeeInformation = _dal.GetRecordsById<IEmployeeInformation>(65);
+            var employeeInformation = _dal.GetRecordById<IEmployeeInformation>(65);
 
         }
 

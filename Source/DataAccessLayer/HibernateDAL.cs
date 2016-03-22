@@ -112,7 +112,7 @@ namespace DataAccessLayer
 
         }
 
-        public T GetRecordsById<T>(Int64 recordId)
+        public T GetRecordById<T>(Int64 recordId)
         {
             using (var trx = _session.BeginTransaction())
             {
@@ -122,7 +122,18 @@ namespace DataAccessLayer
             }           
         }
 
-        public void DeleteRecords<T>(T recordInformation)
+        public IList<T> GetRecords<T>()
+        {
+            using (var trx = _session.BeginTransaction())
+            {
+                var query = _session.CreateQuery("from " + typeof(T));
+                var records = query.List<T>();
+                trx.Commit();
+                return records;
+            }
+        }
+
+        public void DeleteRecord<T>(T recordInformation)
         {
             try
             {
@@ -139,16 +150,16 @@ namespace DataAccessLayer
             }
         }
 
-        public T SaveInformation<T>(T recordInformation)
+        public T SaveRecord<T>(T record)
         {
             try
             {
                 using (var trx = _session.BeginTransaction())
                 {
-                    _session.SaveOrUpdate(recordInformation);
+                    _session.SaveOrUpdate(record);
                     _session.Flush();
                     trx.Commit();
-                    return recordInformation;
+                    return record;
                 }
             }
             catch (Exception exc)
