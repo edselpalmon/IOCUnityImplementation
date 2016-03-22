@@ -1,18 +1,18 @@
 ﻿using System;
+using DataAccessLayer;
 using System.Windows.Forms;
 using DataAccessClass;
 using Entities;
 using ServiceInterfaces;
 using NHibernate;
 using System.Collections.Generic;
-using IOCFactory;
 
 namespace TestHibernate
 {
     public partial class Form1 : Form
     {
 
-        private IHibernateDAL _db = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
+        private IHibernateDAL _db = new HibernateDAL();
 
         public Form1()
         {
@@ -61,7 +61,7 @@ namespace TestHibernate
             var id = Int64.Parse(txtDisplayChannel.Text);
             txtDisplayChannel.Clear();
             var tmpText ="";
-            this.txtDisplayChannel.Text = tmpText + _db.GetRecordById<IEmployeeInformation>(id).LastName;
+            this.txtDisplayChannel.Text = tmpText + _db.GetRecordsById<IEmployeeInformation>(id).LastName;
         }
 
         private void btnSaveEmployee_Click(object sender, EventArgs e)
@@ -126,8 +126,8 @@ namespace TestHibernate
                 employeeInformation.EmployementHistories.Add(employementHistory);
                 employeeInformation.EducationalBackgrounds.Add(educationalBackground);
 
-                var retEmployeeInfo = _db.SaveRecord(employeeInformation);
-                this.txtDisplayChannel.Text = _db.GetRecordById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
+                var retEmployeeInfo = _db.SaveInformation(employeeInformation);
+                this.txtDisplayChannel.Text = _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
             }
             catch (Exception exc)
             {
@@ -145,7 +145,7 @@ namespace TestHibernate
 
                 var id = Int64.Parse(txtDisplayChannel.Text);
 
-                var employeeInformation = _db.GetRecordById<IEmployeeInformation>(id); //_db.LoadRecordInfo<IEmployeeInformation>(3); alternative
+                var employeeInformation = _db.GetRecordsById<IEmployeeInformation>(id); //_db.LoadRecordInfo<IEmployeeInformation>(3); alternative
                 employeeInformation.FirstName = "WAKAKAUlit";
 
                 var employeeAddress = new EmployeeAddress
@@ -188,8 +188,8 @@ namespace TestHibernate
 
                 employeeInformation.EducationalBackgrounds.Add(educationalBackground);
 
-                var retEmployeeInfo = _db.SaveRecord(employeeInformation);
-                this.txtDisplayChannel.Text = _db.GetRecordById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
+                var retEmployeeInfo = _db.SaveInformation(employeeInformation);
+                this.txtDisplayChannel.Text = _db.GetRecordsById<IEmployeeInformation>(retEmployeeInfo.EmployeeId).LastName;
 
 
             }
@@ -207,8 +207,8 @@ namespace TestHibernate
 
                 var id = Int64.Parse(txtDisplayChannel.Text);
 
-                var employee = _db.GetRecordById<IEmployeeInformation>(id);
-                _db.DeleteRecord(employee);
+                var employee = _db.GetRecordsById<IEmployeeInformation>(id);
+                _db.DeleteRecords(employee);
             }
             catch (Exception exc)
             {

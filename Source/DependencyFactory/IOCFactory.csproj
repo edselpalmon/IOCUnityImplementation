@@ -7,8 +7,8 @@
     <ProjectGuid>{BD0272AD-CF2D-49F2-9BEB-FD4F1092A37A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IOCFactory</RootNamespace>
-    <AssemblyName>IOCFactory</AssemblyName>
+    <RootNamespace>DependencyFactory</RootNamespace>
+    <AssemblyName>DependencyFactory</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyFactory.cs" />
-    <Compile Include="IOCDependencyFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,10 +66,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
-      <Project>{90adcca6-a39f-4aa7-b6ff-5b355e25b3e1}</Project>
-      <Name>DataAccessLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{6ad85501-d3eb-44d6-900e-ccc2f9bcf7d8}</Project>
       <Name>Entities</Name>
