@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace ServiceInterfaces
 {
@@ -13,10 +12,9 @@ namespace ServiceInterfaces
         T OpenHibernateSession<T>(string connectionName);
 
         //generic methods
-        T GetRecordById<T>(Int64 recordId);
-        T SaveRecord<T>(T recordInformation);
-        void DeleteRecord<T>(T recordInformation);
+        T GetRecordsById<T>(Int64 recordId);
+        T SaveInformation<T>(T recordInformation);
+        void DeleteRecords<T>(T recordInformation);
         T LoadRecordInfo<T>(Int64 recordId);
-        IList<T> GetRecords<T>();
     }
 }

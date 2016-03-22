@@ -16,6 +16,5 @@ namespace ServiceInterfaces
         string State { get; set; }
         string Country { get; set; }
         string PostalCode { get; set; }
-        IEmployeeInformation EmployeeInformation { get; set; }
     }
 }
