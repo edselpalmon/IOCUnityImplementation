@@ -1,11 +1,11 @@
-﻿using DataAccessLayer;
-using Entities;
+﻿using Entities;
 using Microsoft.Practices.Unity;
 using ServiceInterfaces;
+using Services;
 
 namespace IOCFactory
 {
-    public static class DependencyFactory
+    public static class IOCDependencyFactory
     {
         private static IUnityContainer _container;
 
@@ -30,33 +30,21 @@ namespace IOCFactory
         /// Static constructor for DependencyFactory which will 
         /// initialize the unity container.
         /// </summary>
-        static DependencyFactory()
+        static IOCDependencyFactory()
         {
             var container = new UnityContainer();
 
             //if you have multiple class constructor you need to define the constructor(new injectionconstructor) you need for creating instance of the type you are going to register.
 
-            //registering class with multiple Interface implementation 
-            //InjectionFactory factory = new InjectionFactory(x => x.Resolve<classname>());
-            //container.RegisterType<classname>(new ContainerControlledLifetimeManager());
-            //container.RegisterType<Interface1>("registrationname1", factory);
-            //container.RegisterType<Interface2>("registrationname2", factory);
+            InjectionFactory factory = new InjectionFactory(x => x.Resolve<AccountingService>());
+            container.RegisterType<AccountingService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IService>("Service", factory);
+            container.RegisterType<IAccountingService>("AccountingService", factory);
 
-            //entities
-            container.RegisterType<IEmployeeInformation, EmployeeInformation>("EmployeeInformation", new ContainerControlledLifetimeManager());
-            container.RegisterType<IEmployeeAddress, EmployeeAddress>("EmployeeAddress", new ContainerControlledLifetimeManager());
-            container.RegisterType<IEmployementHistory, EmployementHistory>("EmployementHistory", new ContainerControlledLifetimeManager());
-            container.RegisterType<IEducationalBackground, EducationalBackground>("EducationalBackground", new ContainerControlledLifetimeManager());
-            container.RegisterType<ITestTable, TestTable>("TestTable", new ContainerControlledLifetimeManager());
-
-            //DAL
-            container.RegisterType<IDALSessionFactory, DALSessionFactory>("DALSessionFactory", new ContainerControlledLifetimeManager());
-            var sessionFactory = container.Resolve<IDALSessionFactory>("DALSessionFactory"); //inject this to HibernateDAL constructor
-            container.RegisterType<IHibernateDAL, HibernateDAL>("HibernateDAL",
-                new ContainerControlledLifetimeManager(),
-                new InjectionConstructor(sessionFactory)
-                );
-
+            container.RegisterType<IService, BillingService>("BillingService", new ContainerControlledLifetimeManager());
+            container.RegisterType<IService, PaymentService>("PaymentService", new ContainerControlledLifetimeManager());
+            container.RegisterType<IAccounting, Accounting>("Accounting", new ContainerControlledLifetimeManager());
+            
             _container = container;
         }
 
@@ -87,5 +75,6 @@ namespace IOCFactory
 
             return ret;
         }
+
     }
 }

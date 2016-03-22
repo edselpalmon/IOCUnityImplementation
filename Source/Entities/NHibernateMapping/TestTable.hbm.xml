@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Entities" namespace="Entities">
+  <class name="ServiceInterfaces.ITestTable, ServiceInterfaces" table="TestTable" dynamic-update="true">
+    <id name="TestId" column="TestId" type="Int64" unsaved-value="0">
+      <generator class="identity" />
+    </id>
+    <discriminator column="TESTTABLE_TYPE" type="string"/>
+    <property name="TestName" type="string" length="10" not-null="false"/>
+    <property name="TestDesc" type="string" length="10" not-null="false"/>
+    
+    <subclass name="TestTable" discriminator-value="TestTable">
+    </subclass>
+  </class>
+</hibernate-mapping>
