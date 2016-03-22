@@ -12,11 +12,11 @@ namespace IOCConsoleApplication
     {
         static void Main(string[] args)
         {
-            var service = DependencyFactory.Resolve<IService>("Service");
-            var accountingService = DependencyFactory.Resolve<IAccountingService>("AccountingService");
-            var billingService = DependencyFactory.Resolve<IService>("BillingService");
-            var paymentService = DependencyFactory.Resolve<IService>("PaymentService");
-            var accountInformation = DependencyFactory.Resolve<IAccounting>("Accounting");
+            var service = IOCDependencyFactory.Resolve<IService>("Service");
+            var accountingService = IOCDependencyFactory.Resolve<IAccountingService>("AccountingService");
+            var billingService = IOCDependencyFactory.Resolve<IService>("BillingService");
+            var paymentService = IOCDependencyFactory.Resolve<IService>("PaymentService");
+            var accountInformation = IOCDependencyFactory.Resolve<IAccounting>("Accounting");
 
             accountInformation.FirstName = "Edsel";
             accountInformation.LastName = "Palmon";

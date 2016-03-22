@@ -1,6 +1,4 @@
-﻿using DataAccessClass;
-using Entities;
-using NHibernate;
+﻿using NHibernate;
 using NHibernate.Cfg;
 using ServiceInterfaces;
 using System;
@@ -12,16 +10,18 @@ namespace DataAccessLayer
     public class HibernateDAL : IHibernateDAL
     {
         private ISession _session;
+        private IDALSessionFactory _factory;
 
         public IDictionary<string, ISessionFactory> FactorySessions { get; private set; }
 
-        //constructors
-        public HibernateDAL() //using the default connection
+        #region constructors
+
+        public HibernateDAL(IDALSessionFactory factory) //contructor to be used for multiple db sources then call OpenHibernateSession  
         {
-            //_session = new Configuration().Configure().BuildSessionFactory().OpenSession();
+            _factory = factory;
 
         }
-
+        
         public HibernateDAL(string connectionString) //using Connection string
         {
 
@@ -40,25 +40,9 @@ namespace DataAccessLayer
 
         }
 
-        //public methods
+        #endregion
 
-        public T OpenHibernateSession<T>(string connectionName) //using the default connection
-        {
-            var factory = new DALSessionFactory();
-            FactorySessions = factory.CreateSessionFactory<ISessionFactory>();
-
-            foreach (var sessionFactory in FactorySessions)
-            {
-                if (connectionName == sessionFactory.Key)
-                {
-                    _session = sessionFactory.Value.OpenSession();
-                    
-                }
-            }
-
-            return (T)_session;
-
-        }
+        #region public methods
 
         public IChannel GetChannelById(int channelId)
         {
@@ -107,10 +91,29 @@ namespace DataAccessLayer
             return employeeInformation.EmployeeId;
         }
 
-        /*generic DAL methods*/
-        public T GetRecordsById<T>(Int64 recordId)
-        {
+        #endregion
 
+        #region public generic DAL methods
+
+        public T OpenHibernateSession<T>(string connectionName) 
+        {
+            FactorySessions = _factory.CreateSessionFactory<ISessionFactory>();
+
+            foreach (var sessionFactory in FactorySessions)
+            {
+                if (connectionName == sessionFactory.Key)
+                {
+                    _session = sessionFactory.Value.OpenSession();
+
+                }
+            }
+
+            return (T)_session;
+
+        }
+
+        public T GetRecordById<T>(Int64 recordId)
+        {
             using (var trx = _session.BeginTransaction())
             {
                 var records = _session.Get<T>(recordId);
@@ -119,7 +122,18 @@ namespace DataAccessLayer
             }           
         }
 
-        public void DeleteRecords<T>(T recordInformation)
+        public IList<T> GetRecords<T>()
+        {
+            using (var trx = _session.BeginTransaction())
+            {
+                var query = _session.CreateQuery("from " + typeof(T));
+                var records = query.List<T>();
+                trx.Commit();
+                return records;
+            }
+        }
+
+        public void DeleteRecord<T>(T recordInformation)
         {
             try
             {
@@ -136,16 +150,16 @@ namespace DataAccessLayer
             }
         }
 
-        public T SaveInformation<T>(T recordInformation)
+        public T SaveRecord<T>(T record)
         {
             try
             {
                 using (var trx = _session.BeginTransaction())
                 {
-                    _session.SaveOrUpdate(recordInformation);
+                    _session.SaveOrUpdate(record);
                     _session.Flush();
                     trx.Commit();
-                    return recordInformation;
+                    return record;
                 }
             }
             catch (Exception exc)
@@ -164,7 +178,8 @@ namespace DataAccessLayer
                 return records;
             }
         }
-
+        
+        #endregion
 
     }
 }
