@@ -3,6 +3,7 @@ using IOCFactory;
 using NHibernate;
 using ServiceInterfaces;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace HRMS
@@ -11,6 +12,7 @@ namespace HRMS
     {
         private IHibernateDAL _dal = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
         private ISession _dbSession;
+        private ITransactionLogger _logger = DependencyFactory.Resolve<ITransactionLogger>("TransactionLogger");
 
         public frm201File()
         {
@@ -21,6 +23,8 @@ namespace HRMS
 
         private void btnEmployeeSearch_Click(object sender, EventArgs e)
         {
+            _logger.CreateInfoLog("frm201File", "btnEmployeeSearch_Click", "Search employee transaction");
+
             var allTestTable = _dal.GetRecords<ITestTable>();
             var allEmployee = _dal.GetRecords<IEmployeeInformation>();
 
@@ -41,6 +45,59 @@ namespace HRMS
         {
             _dbSession.Close();
             _dbSession.Dispose();
+        }
+
+        private void btnCreateNew_Click(object sender, EventArgs e)
+        {
+            var employeeInformation = DependencyFactory.Resolve<IEmployeeInformation>("EmployeeInformation");
+            employeeInformation.FirstName = "JENNY";
+            employeeInformation.MiddleName = "S";
+            employeeInformation.LastName = "VILLA";
+            employeeInformation.BirthDate = DateTime.Parse("09/10/1975");
+            employeeInformation.CivilStatus = "M";
+            employeeInformation.Gender = "F";
+            employeeInformation.Salutation = "MS.";
+            employeeInformation.Suffix = "III";
+            employeeInformation.EducationalAttainment = "C";
+            employeeInformation.EmployeeAddresses = new List<IEmployeeAddress>();
+            employeeInformation.EmployementHistories = new List<IEmployementHistory>();
+            employeeInformation.EducationalBackgrounds = new List<IEducationalBackground>();
+
+
+            var employeeAddress = DependencyFactory.Resolve<IEmployeeAddress>("EmployeeAddress");
+            employeeAddress.AddressLine1 = "Latest Addr1";
+            employeeAddress.AddressLine2 = "Latest Addr2";
+            employeeAddress.City = "Pasig";
+            employeeAddress.PostalCode = "1609";
+            employeeAddress.Province = "MyProvince";
+            employeeAddress.State = "MyState";
+            employeeAddress.Country = "Philippines";
+            employeeAddress.EmployeeInformation = employeeInformation;
+
+            var employementHistory = DependencyFactory.Resolve<IEmployementHistory>("EmployementHistory");
+            employementHistory.CompanyAddress = "CompanyAddr";
+            employementHistory.CompanyName = "Company Name";
+            employementHistory.EndDate = DateTime.Parse("10/11/2015");
+            employementHistory.StartDate = DateTime.Parse("03/11/2011");
+            employementHistory.Industry = "Industry";
+            employementHistory.LastPositionHeld = "System Analyst";
+            employementHistory.EmployeeInformation = employeeInformation;
+
+            var educationalBackground = DependencyFactory.Resolve<IEducationalBackground>("EducationalBackground");
+            educationalBackground.SchoolCode = "PUP";
+            educationalBackground.SchoolName = "Polytechnic University of the Philippines";
+            educationalBackground.SchoolAddress = "Sta. Mesa, Manila";
+            educationalBackground.Degree = "BSCoE";
+            educationalBackground.DateAttended = DateTime.Parse("06/01/1992");
+            educationalBackground.DateGraduated = DateTime.Parse("03/31/1997");
+            educationalBackground.EmployeeInformation = employeeInformation;
+                
+            employeeInformation.EmployeeAddresses.Add(employeeAddress);
+            employeeInformation.EmployementHistories.Add(employementHistory);
+            employeeInformation.EducationalBackgrounds.Add(educationalBackground);
+
+            var retEmployeeInfo = _dal.SaveRecord(employeeInformation);
+            
         }
     }
 }
