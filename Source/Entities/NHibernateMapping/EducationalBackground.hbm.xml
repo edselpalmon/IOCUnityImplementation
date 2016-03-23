@@ -1,15 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Entities" namespace="Entities">
-  <class name="Entities.EducationalBackground, Entities" table="EducationalBackground" dynamic-update="true">
+  <class name="ServiceInterfaces.IEducationalBackground, ServiceInterfaces" table="EducationalBackground" dynamic-update="true">
     <id name="EducationId" column="EducationId" type="Int64" unsaved-value="0">
       <generator class="identity" />
     </id>
+    <discriminator column="NHDiscriminator" type="string"/>
     <property name="SchoolCode" type="string" length="50" not-null="false"/>
     <property name="SchoolName" type="string" length="100" not-null="false"/>
     <property name="SchoolAddress" type="string" length="100" not-null="false"/>
     <property name="DateAttended" type="DateTime" not-null="false"/>
     <property name="DateGraduated" type="DateTime" not-null="false"/>
     <property name="Degree" type="string" length="50" not-null="false"/>
-    <many-to-one name="EmployeeInformation" class="Entities.EmployeeInformation" column="EmployeeId" cascade="all"/>
+    <many-to-one name="EmployeeInformation" class="EmployeeInformation" column="EmployeeId" cascade="all"/>
+    <subclass name="EducationalBackground" discriminator-value="EducationalBackground">
+    </subclass>
   </class>
 </hibernate-mapping>

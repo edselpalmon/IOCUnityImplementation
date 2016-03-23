@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using Entities;
+using Logger;
 using Microsoft.Practices.Unity;
 using ServiceInterfaces;
 
@@ -41,6 +42,9 @@ namespace IOCFactory
             //container.RegisterType<classname>(new ContainerControlledLifetimeManager());
             //container.RegisterType<Interface1>("registrationname1", factory);
             //container.RegisterType<Interface2>("registrationname2", factory);
+
+            //transaction logger
+            container.RegisterType<ITransactionLogger, TransactionLogger>("TransactionLogger", new ContainerControlledLifetimeManager());
 
             //entities
             container.RegisterType<IEmployeeInformation, EmployeeInformation>("EmployeeInformation", new ContainerControlledLifetimeManager());
