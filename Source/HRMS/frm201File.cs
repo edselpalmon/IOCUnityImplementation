@@ -12,6 +12,7 @@ namespace HRMS
     {
         private IHibernateDAL _dal = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
         private ISession _dbSession;
+        private ITransactionLogger _logger = DependencyFactory.Resolve<ITransactionLogger>("TransactionLogger");
 
         public frm201File()
         {
@@ -22,6 +23,8 @@ namespace HRMS
 
         private void btnEmployeeSearch_Click(object sender, EventArgs e)
         {
+            _logger.CreateInfoLog("frm201File", "btnEmployeeSearch_Click", "Search employee transaction");
+
             var allTestTable = _dal.GetRecords<ITestTable>();
             var allEmployee = _dal.GetRecords<IEmployeeInformation>();
 
