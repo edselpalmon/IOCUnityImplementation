@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Entities" namespace="Entities">
-  <class name="Entities.EmployeeAddress, Entities" table="EmployeeAddress" dynamic-update="true">
+  <class name="ServiceInterfaces.IEmployeeAddress, ServiceInterfaces" table="EmployeeAddress" dynamic-update="true">
     <id name="AddressId" column="AddressId" type="Int64" unsaved-value="0">
       <generator class="identity" />
     </id>
+    <discriminator column="NHDiscriminator" type="string"/>
     <property name="AddressLine1" type="string" length="100" not-null="true"/>
     <property name="AddressLine2" type="string" length="100" not-null="false"/>
     <property name="City" type="string" length="50" not-null="true"/>
@@ -11,6 +12,8 @@
     <property name="State" type="string" length="100" not-null="false"/>
     <property name="Country" type="string" length="100" not-null="true"/>
     <property name="PostalCode" type="string" not-null="false"/>
-    <many-to-one name="EmployeeInformation" class="Entities.EmployeeInformation" column="EmployeeId" cascade="all"/>
+    <many-to-one name="EmployeeInformation" class="EmployeeInformation" column="EmployeeId" cascade="all"/>
+    <subclass name="EmployeeAddress" discriminator-value="EmployeeAddress">
+    </subclass>
   </class>
 </hibernate-mapping>

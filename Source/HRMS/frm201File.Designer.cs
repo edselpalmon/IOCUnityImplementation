@@ -85,6 +85,7 @@
             this.btnCreateNew.TabIndex = 1;
             this.btnCreateNew.Text = "New Employee";
             this.btnCreateNew.UseVisualStyleBackColor = true;
+            this.btnCreateNew.Click += new System.EventHandler(this.btnCreateNew_Click);
             // 
             // frm201File
             // 
