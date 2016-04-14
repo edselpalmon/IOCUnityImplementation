@@ -1,0 +1,34 @@
+﻿<!doctype html>
+<html ng-app="HRMSWeb">
+<head>
+    <meta charset="utf-8">
+    <title>HRMS Web Application</title>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Modules/module.js"></script>
+    <script src="Controllers/controller.js"></script>
+    <script src="Routes/route.js"></script>
+</head>
+<body ng-controller="mainController">
+                                                              
+    <!-- HEADER AND NAVBAR -->
+    <header style="border:1px solid black;">
+        <nav>
+            <div id="headerContainer">
+                <a href="#home">Home</a>&nbsp;|&nbsp;
+                <a href="#employeeinfo">Employee Information</a>&nbsp;|&nbsp;
+                <a href="#about">About</a>&nbsp;|&nbsp;
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT AND INJECTED VIEWS -->
+    <div id="mainContainer">
+
+        <div id="viewContainer" ng-view></div>
+
+    </div>
+
+</body>
+</html>
