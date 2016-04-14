@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
-namespace HRMSService
+namespace HRMSService.DataContracts
 {
     [DataContract]
-    public class EmployeeDataContract
+    public class EmployeeInformation
     {
         [DataMember]
         public string LastName { get; set; }

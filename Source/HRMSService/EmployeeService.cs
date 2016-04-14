@@ -6,6 +6,7 @@ using NHibernate;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Text;
+using HRMSService.DataContracts;
 
 namespace HRMSService
 {
@@ -41,12 +42,12 @@ namespace HRMSService
         }
 
        
-        public EmployeeDataContract GetEmployeeById(int EmployeeId)
+        public EmployeeInformation GetEmployeeById(int EmployeeId)
         {
 
             var employee = _dal.GetRecordById<IEmployeeInformation>(EmployeeId);
 
-            var basicInfo = new EmployeeDataContract
+            var basicInfo = new EmployeeInformation
             {
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,

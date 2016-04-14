@@ -1,4 +1,5 @@
 ﻿using EntityInterfaces;
+using HRMSService.DataContracts;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
@@ -19,6 +20,6 @@ namespace HRMSService
           RequestFormat = WebMessageFormat.Json,
           BodyStyle = WebMessageBodyStyle.Bare)]
         [OperationContract]
-        EmployeeDataContract GetEmployeeById(int EmployeeId);
+        EmployeeInformation GetEmployeeById(int EmployeeId);
     }
 }

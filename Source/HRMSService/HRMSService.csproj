@@ -82,7 +82,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmployeeDataContract.cs" />
+    <Compile Include="DataContracts\EmployeeInformation.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
