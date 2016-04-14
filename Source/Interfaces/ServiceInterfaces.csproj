@@ -40,19 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAccounting.cs" />
     <Compile Include="IAccountingService.cs" />
     <Compile Include="IChannel.cs" />
     <Compile Include="IDALSessionFactory.cs" />
-    <Compile Include="IEducationalBackground.cs" />
-    <Compile Include="IEmployeeAddress.cs" />
-    <Compile Include="IEmployeeInformation.cs" />
-    <Compile Include="IEmployementHistory.cs" />
     <Compile Include="IHibernateDAL.cs" />
     <Compile Include="IService.cs" />
-    <Compile Include="ITestTable.cs" />
     <Compile Include="ITransactionLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntityInterfaces\EntityInterfaces.csproj">
+      <Project>{e4889007-7175-4956-8e3a-63193d369522}</Project>
+      <Name>EntityInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

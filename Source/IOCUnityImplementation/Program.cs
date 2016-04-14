@@ -1,10 +1,7 @@
-﻿using IOCFactory;
+﻿using EntityInterfaces;
+using IOCFactory;
 using ServiceInterfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IOCConsoleApplication
 {

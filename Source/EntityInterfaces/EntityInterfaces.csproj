@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90ADCCA6-A39F-4AA7-B6FF-5B355E25B3E1}</ProjectGuid>
+    <ProjectGuid>{E4889007-7175-4956-8E3A-63193D369522}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataAccessLayer</RootNamespace>
-    <AssemblyName>DataAccessLayer</AssemblyName>
+    <RootNamespace>EntityInterfaces</RootNamespace>
+    <AssemblyName>EntityInterfaces</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,16 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,30 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DALSessionFactory.cs" />
-    <Compile Include="HibernateDAL.cs" />
+    <Compile Include="IAccounting.cs" />
+    <Compile Include="IEducationalBackground.cs" />
+    <Compile Include="IEmployeeAddress.cs" />
+    <Compile Include="IEmployeeInformation.cs" />
+    <Compile Include="IEmployementHistory.cs" />
+    <Compile Include="ITestTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataLayer\DataAccessClass.csproj">
-      <Project>{83fb25df-eaa1-40a4-8d6f-b08a202a304d}</Project>
-      <Name>DataAccessClass</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entities\Entities.csproj">
-      <Project>{6ad85501-d3eb-44d6-900e-ccc2f9bcf7d8}</Project>
-      <Name>Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EntityInterfaces\EntityInterfaces.csproj">
-      <Project>{e4889007-7175-4956-8e3a-63193d369522}</Project>
-      <Name>EntityInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Interfaces\ServiceInterfaces.csproj">
-      <Project>{faa61a43-6429-4041-a140-86094afaf2fd}</Project>
-      <Name>ServiceInterfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

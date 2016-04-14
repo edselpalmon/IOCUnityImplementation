@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Entities" namespace="Entities">
-  <class name="ServiceInterfaces.IEmployeeInformation, ServiceInterfaces" table="EmployeeInformation">
+  <class name="EntityInterfaces.IEmployeeInformation, EntityInterfaces" table="EmployeeInformation">
     <id name="EmployeeId" column="EmployeeId" type="Int64" unsaved-value="0">
       <generator class="identity" />
     </id>

@@ -111,6 +111,10 @@
       <Project>{6ad85501-d3eb-44d6-900e-ccc2f9bcf7d8}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EntityInterfaces\EntityInterfaces.csproj">
+      <Project>{e4889007-7175-4956-8e3a-63193d369522}</Project>
+      <Name>EntityInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\ServiceInterfaces.csproj">
       <Project>{faa61a43-6429-4041-a140-86094afaf2fd}</Project>
       <Name>ServiceInterfaces</Name>
