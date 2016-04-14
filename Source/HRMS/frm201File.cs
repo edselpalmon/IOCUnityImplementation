@@ -5,6 +5,7 @@ using ServiceInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace HRMS
 {
@@ -13,6 +14,7 @@ namespace HRMS
         private IHibernateDAL _dal = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
         private ISession _dbSession;
         private ITransactionLogger _logger = DependencyFactory.Resolve<ITransactionLogger>("TransactionLogger");
+        private IList<IEmployeeInformation> _employees;
 
         public frm201File()
         {
@@ -25,10 +27,15 @@ namespace HRMS
         {
             _logger.CreateInfoLog("frm201File", "btnEmployeeSearch_Click", "Search employee transaction");
 
-            var allTestTable = _dal.GetRecords<ITestTable>();
+           
             var allEmployee = _dal.GetRecords<IEmployeeInformation>();
 
+            _employees = _dal.GetRecords<IEmployeeInformation>();
 
+            gvPersonalInfo.AutoGenerateColumns = false;
+            gvPersonalInfo.DataSource = _employees;
+
+            var allTestTable = _dal.GetRecords<ITestTable>();
             var test = _dal.GetRecordById<ITestTable>(1);
             var testtbl = new TestTable
             {
@@ -38,6 +45,7 @@ namespace HRMS
             _dal.SaveRecord<ITestTable>(testtbl);
 
             var employeeInformation = _dal.GetRecordById<IEmployeeInformation>(65);
+
 
         }
 
@@ -98,6 +106,22 @@ namespace HRMS
 
             var retEmployeeInfo = _dal.SaveRecord(employeeInformation);
             
+        }
+
+        private void gvPersonalInfo_Click(object sender, EventArgs e)
+        {
+
+            var parentGrid = (DataGridView)sender;
+            var selectedid = (Int64)parentGrid.CurrentRow.Cells[0].Value;
+            var childsource = (from employee in _employees
+                               where employee.EmployeeId == selectedid
+                               select employee.EmployementHistories).FirstOrDefault();
+
+            var childview = new DataGridView();
+            childview.AutoGenerateColumns = true;
+            childview.DataSource = childsource;
+
+            gvPersonalInfo.Controls.Add(childview);
         }
     }
 }
