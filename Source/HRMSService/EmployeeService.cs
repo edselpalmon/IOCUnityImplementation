@@ -1,8 +1,6 @@
 ﻿using EntityInterfaces;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.Text;
 using HRMSService.DataContracts;
+using Newtonsoft.Json;
 
 namespace HRMSService
 {
@@ -14,15 +12,8 @@ namespace HRMSService
         {
 
             var employee = Global.DAL.GetRecordById<IEmployeeInformation>(EmployeeId);
-
-
-            // Serialize the results as JSON
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(employee.GetType());
-            MemoryStream memoryStream = new MemoryStream();
-            serializer.WriteObject(memoryStream, employee);
-
-            // Return the results serialized as JSON
-            string json = Encoding.Default.GetString(memoryStream.ToArray());
+           
+            var json = JsonConvert.SerializeObject(employee);
             return json;
 
         }
