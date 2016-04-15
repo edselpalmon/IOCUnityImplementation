@@ -15,7 +15,14 @@ HRMSWeb.controller('contactController', function ($scope) {
     $scope.message = 'Contact Us!';
 });
 
-HRMSWeb.controller('EmployeeController', function ($scope) {
+HRMSWeb.controller('EmployeeController', ['$scope', 'mainService', function ($scope, mainService) {
+
+    $scope.URL = "http://localhost/HRMSService/EmployeeService/GetEmployeeById";
+    $scope.param = 2; //maybe a json string data
+    mainService.PostData($scope.URL, $scope.param).then(function (data) {
+
+        //You will get "data" as a response from DTHTopup service
+    });
 
     $scope.Employee = {
         FirstName: "Edsel",
@@ -23,4 +30,6 @@ HRMSWeb.controller('EmployeeController', function ($scope) {
         MiddleName: "Villanueva"
     };
 
-});
+}]);
+
+

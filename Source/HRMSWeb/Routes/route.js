@@ -1,5 +1,10 @@
 ﻿// configure our routes
-HRMSWeb.config(function ($routeProvider) {
+HRMSWeb.config(['$httpProvider', '$routeProvider', function ($httpProvider, $routeProvider) {
+    //$httpProvider.defaults.headers.common = {};
+    //$httpProvider.defaults.headers.post = {};
+    //$httpProvider.defaults.headers.put = {};
+    //$httpProvider.defaults.headers.patch = {};
+
     $routeProvider
 
         // route for the home page
@@ -30,4 +35,4 @@ HRMSWeb.config(function ($routeProvider) {
             templateUrl: 'Views/employee.html',
             controller: 'EmployeeController'
         });
-});
+}]);
