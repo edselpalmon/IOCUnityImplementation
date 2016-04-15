@@ -4,7 +4,6 @@
             var deferred = $q.defer();
             $http({
                 url: URL,
-                crossDomain: true,
                 method: "POST",
                 data: param, //Data sent to server
                 contentType: "application/json; charset=utf-8",

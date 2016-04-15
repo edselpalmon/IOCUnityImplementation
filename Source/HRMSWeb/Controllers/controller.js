@@ -21,14 +21,9 @@ HRMSWeb.controller('EmployeeController', ['$scope', 'mainService', function ($sc
     $scope.param = 2; //maybe a json string data
     mainService.PostData($scope.URL, $scope.param).then(function (data) {
 
-        //You will get "data" as a response from DTHTopup service
+        console.log(data);
+        $scope.Employee = data;
     });
-
-    $scope.Employee = {
-        FirstName: "Edsel",
-        LastName: "Palmon",
-        MiddleName: "Villanueva"
-    };
 
 }]);
 
