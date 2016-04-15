@@ -1,8 +1,4 @@
 ﻿using EntityInterfaces;
-using IOCFactory;
-using ServiceInterfaces;
-using System.Collections.Generic;
-using NHibernate;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Text;
@@ -13,21 +9,11 @@ namespace HRMSService
     public class EmployeeService : IEmployeeService
     {
 
-        private IHibernateDAL _dal = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
-        private ISession _dbSession;
-        private ITransactionLogger _logger = DependencyFactory.Resolve<ITransactionLogger>("TransactionLogger");
-        private IList<IEmployeeInformation> _employees;
 
-        public EmployeeService()
-        {
-            _dbSession = _dal.OpenHibernateSession<ISession>("HRMSDB");
-        }
-
-       
         public string GetEmployeeByIdX(int EmployeeId)
         {
 
-            var employee = _dal.GetRecordById<IEmployeeInformation>(EmployeeId);
+            var employee = Global.DAL.GetRecordById<IEmployeeInformation>(EmployeeId);
 
 
             // Serialize the results as JSON
@@ -41,11 +27,16 @@ namespace HRMSService
 
         }
 
-       
+
         public EmployeeInformation GetEmployeeById(int EmployeeId)
         {
 
-            var employee = _dal.GetRecordById<IEmployeeInformation>(EmployeeId);
+            var employee = Global.DAL.GetRecordById<IEmployeeInformation>(EmployeeId);
+
+            if (employee == null) //when no records found
+            {
+                return new EmployeeInformation();
+            }
 
             var basicInfo = new EmployeeInformation
             {
@@ -55,7 +46,6 @@ namespace HRMSService
             };
 
             return basicInfo;
-
         }
 
     }
