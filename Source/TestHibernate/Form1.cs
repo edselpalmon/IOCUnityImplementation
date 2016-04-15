@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using DataAccessClass;
 using Entities;
 using ServiceInterfaces;
+using EntityInterfaces;
 using NHibernate;
 using System.Collections.Generic;
 using IOCFactory;

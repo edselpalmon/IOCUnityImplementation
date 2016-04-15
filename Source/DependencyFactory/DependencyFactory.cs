@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using Entities;
+using EntityInterfaces;
 using Logger;
 using Microsoft.Practices.Unity;
 using ServiceInterfaces;
