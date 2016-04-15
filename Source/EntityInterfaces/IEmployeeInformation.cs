@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ServiceInterfaces
+namespace EntityInterfaces
 {
     public interface IEmployeeInformation
     {

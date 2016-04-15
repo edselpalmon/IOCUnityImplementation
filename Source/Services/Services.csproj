@@ -46,6 +46,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EntityInterfaces\EntityInterfaces.csproj">
+      <Project>{e4889007-7175-4956-8e3a-63193d369522}</Project>
+      <Name>EntityInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\ServiceInterfaces.csproj">
       <Project>{faa61a43-6429-4041-a140-86094afaf2fd}</Project>
       <Name>ServiceInterfaces</Name>

@@ -1,4 +1,4 @@
-﻿using ServiceInterfaces;
+﻿using EntityInterfaces;
 using System;
 
 namespace Entities

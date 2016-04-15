@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceInterfaces
+namespace EntityInterfaces
 {
     public interface IEmployementHistory
     {

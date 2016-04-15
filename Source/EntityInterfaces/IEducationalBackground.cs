@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceInterfaces
+namespace EntityInterfaces
 {
     public interface IEducationalBackground
     {

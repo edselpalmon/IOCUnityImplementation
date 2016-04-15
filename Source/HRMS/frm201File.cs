@@ -1,6 +1,7 @@
 ﻿using Entities;
 using IOCFactory;
 using NHibernate;
+using EntityInterfaces;
 using ServiceInterfaces;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityInterfaces;
+using System;
 using System.Collections.Generic;
 
 namespace ServiceInterfaces

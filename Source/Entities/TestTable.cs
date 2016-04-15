@@ -1,5 +1,5 @@
 ﻿using System;
-using ServiceInterfaces;
+using EntityInterfaces;
 
 namespace Entities
 {

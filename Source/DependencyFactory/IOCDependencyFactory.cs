@@ -1,6 +1,7 @@
 ﻿using Entities;
 using Microsoft.Practices.Unity;
 using ServiceInterfaces;
+using EntityInterfaces;
 using Services;
 
 namespace IOCFactory

@@ -1,5 +1,6 @@
 ﻿using NHibernate;
 using NHibernate.Cfg;
+using EntityInterfaces;
 using ServiceInterfaces;
 using System;
 using System.Collections.Generic;
