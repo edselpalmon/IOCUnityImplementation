@@ -866,6 +866,7 @@
     <Content Include="Views\about.html" />
     <Content Include="Views\contact.html" />
     <Content Include="Views\employee.html" />
+    <Content Include="Views\employees.html" />
     <Content Include="Views\home.html" />
     <Content Include="Web.config" />
   </ItemGroup>

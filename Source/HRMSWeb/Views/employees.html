@@ -1,0 +1,20 @@
+﻿<div>
+    <table>
+        <tr>
+            <td colspan="3">List Of Employees</td>
+        </tr>
+        <tr>
+            <td>Employee Id</td>
+            <td>First Name</td>
+            <td>Middle Name</td>
+            <td>Last Name</td>
+        </tr>
+        <tr ng-repeat="Employee in Employees">
+            <td><a href="#employeeinfo?employeeId={{Employee.EmployeeId}}">{{Employee.EmployeeId}}</a></td>
+            <td>{{Employee.FirstName}} </td>
+            <td>{{Employee.FirstName}}</td>
+            <td>{{Employee.MiddleName}}</td>
+            <td>{{Employee.LastName}}</td>
+        </tr>
+    </table>
+</div>

@@ -1,24 +1,12 @@
 ﻿using EntityInterfaces;
 using HRMSService.DataContracts;
-using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace HRMSService
 {
     public class EmployeeService : IEmployeeService
     {
-
-
-        public string GetEmployeeByIdX(int EmployeeId)
-        {
-
-            var employee = Global.DAL.GetRecordById<IEmployeeInformation>(EmployeeId);
-           
-            var json = JsonConvert.SerializeObject(employee);
-            return json;
-
-        }
-
-
+        //note: EmployeeInformation is a datacontract. IEmployeeInformation is the interface of Employeeinformation Entity
         public EmployeeInformation GetEmployeeById(int EmployeeId)
         {
 
@@ -37,6 +25,34 @@ namespace HRMSService
             };
 
             return basicInfo;
+        }
+
+        public IList<EmployeeInformation> GetEmployees()
+        {
+
+            var employees = Global.DAL.GetRecords<IEmployeeInformation>();
+
+            if (employees == null) //when no records found
+            {
+                return new List<EmployeeInformation>();
+            }
+
+
+            var listOfEmployees = new List<EmployeeInformation>();
+            foreach(var employee in employees)
+            {
+                listOfEmployees.Add(
+                    new EmployeeInformation
+                    {
+                        EmployeeId = employee.EmployeeId,
+                        FirstName = employee.FirstName,
+                        LastName = employee.LastName,
+                        MiddleName = employee.MiddleName
+                    }
+                );
+            };
+
+            return listOfEmployees;
         }
 
     }

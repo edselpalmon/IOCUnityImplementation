@@ -1,5 +1,5 @@
 ﻿// configure our routes
-HRMSWeb.config(['$routeProvider', function ($httpProvider, $routeProvider) {
+HRMSWeb.config(['$routeProvider', function ($routeProvider) {
 
     $routeProvider
 
@@ -26,9 +26,13 @@ HRMSWeb.config(['$routeProvider', function ($httpProvider, $routeProvider) {
             controller: 'contactController'
         })
     
-        // route for the contact page
         .when('/employeeinfo', {
             templateUrl: 'Views/employee.html',
             controller: 'EmployeeController'
+        })
+
+        .when('/employeelist', {
+            templateUrl: 'Views/employees.html',
+            controller: 'EmployeesController'
         });
 }]);

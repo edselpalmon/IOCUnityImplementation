@@ -15,14 +15,31 @@ HRMSWeb.controller('contactController', function ($scope) {
     $scope.message = 'Contact Us!';
 });
 
-HRMSWeb.controller('EmployeeController', ['$scope', 'mainService', function ($scope, mainService) {
-
-    $scope.URL = "http://localhost/HRMSService/EmployeeService/GetEmployeeById";
-    $scope.param = 2; //maybe a json string data
+HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService', function ($scope, $routeParams, mainService) {
+    //deployed URI service 
+    //$scope.URL = "http://localhost/HRMSService/EmployeeService/GetEmployeeById";
+    
+    //for debugging
+    $scope.URL = "http://localhost:55640/EmployeeService/GetEmployeeById";
+    $scope.param = $routeParams.employeeId;
     mainService.PostData($scope.URL, $scope.param).then(function (data) {
 
         console.log(data);
         $scope.Employee = data;
+    });
+
+}]);
+
+HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', function ($scope, mainService) {
+    //deployed URI service 
+    //$scope.URL = "http://localhost/HRMSService/EmployeeService/GetEmployees";
+
+    //for debugging
+    $scope.URL = "http://localhost:55640/EmployeeService/GetEmployees";
+    mainService.PostData($scope.URL, $scope.param).then(function (data) {
+
+        console.log(data);
+        $scope.Employees = data;
     });
 
 }]);
