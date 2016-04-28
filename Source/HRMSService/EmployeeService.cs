@@ -1,11 +1,22 @@
-﻿using EntityInterfaces;
+﻿using AutoMapper;
+using EntityInterfaces;
 using HRMSService.DataContracts;
+using IOCFactory;
 using System.Collections.Generic;
 
 namespace HRMSService
 {
     public class EmployeeService : IEmployeeService
     {
+
+        private MapperConfiguration _config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<IEmployeeAddress, EmployeeAddress>();
+            cfg.CreateMap<IEducationalBackground, EducationalBackground>();
+            cfg.CreateMap<IEmployementHistory, EmployementHistory>();
+            cfg.CreateMap<IEmployeeInformation, EmployeeInformation>();
+        });
+
         //note: EmployeeInformation is a datacontract. IEmployeeInformation is the interface of Employeeinformation Entity
         public EmployeeInformation GetEmployeeById(int EmployeeId)
         {
@@ -17,14 +28,15 @@ namespace HRMSService
                 return new EmployeeInformation();
             }
 
-            var basicInfo = new EmployeeInformation
-            {
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                MiddleName = employee.MiddleName
-            };
+            //_config.AssertConfigurationIsValid();  this is for verification only
 
-            return basicInfo;
+            var mapper = _config.CreateMapper();
+
+            var employeeInfo = mapper.Map<EmployeeInformation>(employee);
+
+            //Mapper.Map<EmployeeInformation, IEmployeeInformation>();
+
+            return employeeInfo;
         }
 
         public IList<EmployeeInformation> GetEmployees()
@@ -37,23 +49,35 @@ namespace HRMSService
                 return new List<EmployeeInformation>();
             }
 
+            var mapper = _config.CreateMapper();
 
-            var listOfEmployees = new List<EmployeeInformation>();
-            foreach(var employee in employees)
-            {
-                listOfEmployees.Add(
-                    new EmployeeInformation
-                    {
-                        EmployeeId = employee.EmployeeId,
-                        FirstName = employee.FirstName,
-                        LastName = employee.LastName,
-                        MiddleName = employee.MiddleName
-                    }
-                );
-            };
-
+            var listOfEmployees = mapper.Map<List<EmployeeInformation>>(employees);
+            
             return listOfEmployees;
         }
 
+
+        public void edsel()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<IEmployeeInformation, EmployeeInformation>();
+            });
+            config.AssertConfigurationIsValid();
+        }
+
     }
+
+    public class Source
+    {
+        public int frmValue { get; set; }
+        public int frmValue2 { get; set; }
+    }
+    public class Dest
+    {
+        public int Value { get; set; }
+        public int Value2 { get; set; }
+    }
+    
+
 }
