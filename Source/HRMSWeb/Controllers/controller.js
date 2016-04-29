@@ -23,7 +23,6 @@ HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService
     $scope.URL = "http://localhost:55640/EmployeeService/GetEmployeeById";
     $scope.param = $routeParams.employeeId;
     mainService.PostData($scope.URL, $scope.param).then(function (data) {
-
         $scope.Employee = data;
     });
 
@@ -36,7 +35,6 @@ HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', function ($s
     //for debugging
     $scope.URL = "http://localhost:55640/EmployeeService/GetEmployees";
     mainService.PostData($scope.URL, $scope.param).then(function (data) {
-
         $scope.Employees = data;
     });
 

@@ -1,4 +1,8 @@
-﻿    table {
+﻿body{
+    background-image:url(../Images/18.jpg)
+}   
+ 
+table {
         border-collapse:separate;
         border:solid gray 1px;
         border-radius:10px;
@@ -29,4 +33,10 @@
 
     th:first-child, td:first-child {
          border-left: none;
+    }
+
+    input {
+        border-radius: 6px;
+        -moz-border-radius: 6px;
+        background-color:lightsalmon;
     }
