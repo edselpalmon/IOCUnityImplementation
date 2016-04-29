@@ -74,6 +74,8 @@
     <Content Include="Factories\factory.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\18.jpg" />
+    <Content Include="Images\xx18.jpg" />
+    <Content Include="Images\yy.jpg" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
