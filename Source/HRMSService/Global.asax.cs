@@ -3,9 +3,11 @@ using System.ServiceModel.Activation;
 using System.Web.Routing;
 using IOCFactory;
 using ServiceInterfaces;
-using System.Collections.Generic;
 using NHibernate;
 using System.Web;
+using AutoMapper;
+using EntityInterfaces;
+using HRMSService.DataContracts;
 
 namespace HRMSService
 {
@@ -13,7 +15,8 @@ namespace HRMSService
     {
 
         public static IHibernateDAL DAL { get; private set; }
-        public static ITransactionLogger Logger { get; private set; }
+        public static ITransactionLogger Logger { get; private set; }  
+        public static IMapper Mapper { get; private set; }
 
         private ISession DBSession;
 
@@ -22,6 +25,16 @@ namespace HRMSService
             DAL = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
             Logger = DependencyFactory.Resolve<ITransactionLogger>("TransactionLogger");
             DBSession = DAL.OpenHibernateSession<ISession>("HRMSDB");
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<IEmployeeAddress, EmployeeAddress>();
+                cfg.CreateMap<IEducationalBackground, EducationalBackground>();
+                cfg.CreateMap<IEmployementHistory, EmployementHistory>();
+                cfg.CreateMap<IEmployeeInformation, EmployeeInformation>();
+            });
+
+            Mapper = config.CreateMapper();
 
             RouteTable.Routes.Add(new ServiceRoute("EmployeeService", new WebServiceHostFactory(), typeof(EmployeeService)));
         }

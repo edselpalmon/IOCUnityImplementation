@@ -3,35 +3,89 @@
 <head>
     <meta charset="utf-8">
     <title>HRMS Web Application</title>
+    <link rel="stylesheet" href="/Content/bootstrap.min.css"/>
+    <script src="Scripts/jquery-2.2.3.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/angular-route.js"></script>
     <script src="Modules/module.js"></script>
     <script src="Routes/route.js"></script>
     <script src="Controllers/controller.js"></script>
     <script src="Factories/factory.js"></script>
+    <script language="javascript">
+        
+        $(document).ready(function () {
+
+            var currentLocation = $(location).attr("href");
+            var selectedMenu = currentLocation.substring(currentLocation.indexOf("#/") + 2);
+            if (selectedMenu.indexOf("?") > 0)
+            {
+                selectedMenu = selectedMenu.substring(0, selectedMenu.indexOf("?"));
+            }
+            console.log(selectedMenu);
+            $('[id^="mainmenu"]').each(function () {
+
+                //handler for re-selecting the current selected menu when refreshed button is clicked.
+                if (selectedMenu == ""){
+                    $("#mainmenu1").addClass("active");
+                }
+                else if ($(this).html().indexOf(selectedMenu) > 0) {
+                    $(this).addClass("active");
+                }
+                else if ($(this).html().indexOf(selectedMenu) > 0) {
+                    $(this).addClass("active");
+                }
+
+                $(this).click(
+                    function () {
+                        if ($(this).attr("class") != "active" || $(this).attr("class") != "dropdown active") {
+                            $(this).addClass("active");
+                        }
+                        var selectedMenu = $(this).attr("id");
+                        //toggle active class for the remaining menu items
+                        $('[id^="mainmenu"]').each(function () {
+                            if ($(this).attr("id") != selectedMenu)
+                            {
+                                $(this).removeClass("active");
+                            }
+                        })
+                    }
+                 );
+            });
+        });
+
+        
+    </script>
 
 </head>
 <body ng-controller="mainController">
                                                               
-    <!-- HEADER AND NAVBAR -->
-    <header style="border:1px solid black;">
-        <nav>
-            <div id="headerContainer">
-                <a href="#home">Home</a>&nbsp;|&nbsp;
-                <a href="#employeeinfo">Employee Information</a>&nbsp;|&nbsp;
-                <a href="#employeelist">List Of Employee</a>&nbsp;|&nbsp;
-                <a href="#about">About</a>&nbsp;|&nbsp;
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
-    </header>
+    <div class="container">
+        <!-- HEADER AND NAVBAR -->
+        <h3>Human Resource Management System</h3>
+        <ul class="nav nav-tabs">
+            <li id="mainmenu1"><a href="#home">Home</a></li>
+            <li id="mainmenu2"><a href="#employeelist">Employees</a></li>
+            <li id="mainmenu3"><a href="#employeedetail">Employee Detail</a></li>
+            <li id="mainmenu4"><a href="#about">About</a></li>
+            <li id="mainmenu5"><a href="#contact">Contact</a></li>
+            <li id="mainmenu6" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">For Future Use<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Submenu 1-1</a></li>
+                    <li><a href="#">Submenu 1-2</a></li>
+                    <li><a href="#">Submenu 1-3</a></li>
+                </ul>
+            </li>
+        </ul>
 
-    <!-- MAIN CONTENT AND INJECTED VIEWS -->
-    <div id="mainContainer">
+        <!-- MAIN CONTENT AND INJECTED VIEWS -->
+        <div id="mainContainer" style="padding-top:5px;">
 
-        <div id="viewContainer" ng-view></div>
+            <div id="viewContainer" ng-view></div>
+
+        </div>
 
     </div>
-
 </body>
 </html>

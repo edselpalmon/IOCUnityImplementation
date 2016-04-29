@@ -1,7 +1,7 @@
 ﻿<div>
-    <table>
+    <table border="1">
         <tr>
-            <td colspan="3">List Of Employees</td>
+            <th colspan="4">List Of Employees</th>
         </tr>
         <tr>
             <td>Employee Id</td>
@@ -10,9 +10,8 @@
             <td>Last Name</td>
         </tr>
         <tr ng-repeat="Employee in Employees">
-            <td><a href="#employeeinfo?employeeId={{Employee.EmployeeId}}">{{Employee.EmployeeId}}</a></td>
+            <td><a href="#employeedetail?employeeId={{Employee.EmployeeId}}" onclick="$('#mainmenu3').addClass('active'); $('#mainmenu2').removeClass('active');">{{Employee.EmployeeId}}</a></td>
             <td>{{Employee.FirstName}} </td>
-            <td>{{Employee.FirstName}}</td>
             <td>{{Employee.MiddleName}}</td>
             <td>{{Employee.LastName}}</td>
         </tr>

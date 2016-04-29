@@ -26,13 +26,13 @@ HRMSWeb.config(['$routeProvider', function ($routeProvider) {
             controller: 'contactController'
         })
     
-        .when('/employeeinfo', {
-            templateUrl: 'Views/employee.html',
+        .when('/employeedetail', {
+            templateUrl: 'Views/Employee/employee_detail.html',
             controller: 'EmployeeController'
         })
 
         .when('/employeelist', {
-            templateUrl: 'Views/employees.html',
+            templateUrl: 'Views/Employee/employees.html',
             controller: 'EmployeesController'
         });
 }]);
