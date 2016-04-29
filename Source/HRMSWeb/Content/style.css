@@ -1,0 +1,32 @@
+﻿    table {
+        border-collapse:separate;
+        border:solid gray 1px;
+        border-radius:10px;
+        -moz-border-radius:10px;
+    }
+
+    td, th{
+        border-left:solid gray 1px;
+        border-top:solid gray 1px;
+        padding:5px;
+    }
+
+    th {
+        background-color:darkgreen;
+        border-top: none;
+        color:antiquewhite;
+    }
+
+    th:first-child{
+        border-top-left-radius:8px;
+        -moz-border-radius-topleft:8px;
+    }
+
+    th:last-child {
+        border-top-right-radius: 8px;
+        -moz-border-radius-topright: 8px;
+    }
+
+    th:first-child, td:first-child {
+         border-left: none;
+    }

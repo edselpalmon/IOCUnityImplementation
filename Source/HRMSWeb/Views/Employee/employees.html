@@ -1,13 +1,11 @@
 ﻿<div>
-    <table border="1">
+    <h1>List Of Employees</h1>
+    <table>
         <tr>
-            <th colspan="4">List Of Employees</th>
-        </tr>
-        <tr>
-            <td>Employee Id</td>
-            <td>First Name</td>
-            <td>Middle Name</td>
-            <td>Last Name</td>
+            <th>Employee Id</th>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
         </tr>
         <tr ng-repeat="Employee in Employees">
             <td><a href="#employeedetail?employeeId={{Employee.EmployeeId}}" onclick="$('#mainmenu3').addClass('active'); $('#mainmenu2').removeClass('active');">{{Employee.EmployeeId}}</a></td>
