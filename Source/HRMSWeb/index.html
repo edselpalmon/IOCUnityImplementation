@@ -4,66 +4,34 @@
     <meta charset="utf-8">
     <title>HRMS Web Application</title>
     <link rel="stylesheet" href="/Content/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/Content/loading-bar.min.css" />
+    <!--<link rel="stylesheet" href="/Content/loading-bar.css" />-->
     <link rel="stylesheet" href="/Content/style.css" />
     <script src="Scripts/jquery-2.2.3.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-animate.min.js"></script>
     <script src="Scripts/angular-route.js"></script>
-    <script src="Modules/module.js"></script>
-    <script src="Routes/route.js"></script>
-    <script src="Controllers/controller.js"></script>
-    <script src="Factories/factory.js"></script>
-    <script language="javascript">
-        
-        $(document).ready(function () {
-
-            var currentLocation = $(location).attr("href");
-            var selectedMenu = currentLocation.substring(currentLocation.indexOf("#/") + 2);
-            if (selectedMenu.indexOf("?") > 0)
-            {
-                selectedMenu = selectedMenu.substring(0, selectedMenu.indexOf("?"));
-            }
-            
-            $('[id^="mainmenu"]').each(function () {
-
-                //handler for re-selecting the current selected menu when refreshed button is clicked.
-                if (selectedMenu == ""){
-                    $("#mainmenu1").addClass("active");
-                }
-                else if ($(this).html().indexOf(selectedMenu) > 0) {
-                    $(this).addClass("active");
-                }
-                else if ($(this).html().indexOf(selectedMenu) > 0) {
-                    $(this).addClass("active");
-                }
-
-                $(this).click(
-                    function () {
-                        if ($(this).attr("class") != "active" || $(this).attr("class") != "dropdown active") {
-                            $(this).addClass("active");
-                        }
-                        var selectedMenu = $(this).attr("id");
-                        //toggle active class for the remaining menu items
-                        $('[id^="mainmenu"]').each(function () {
-                            if ($(this).attr("id") != selectedMenu)
-                            {
-                                $(this).removeClass("active");
-                            }
-                        })
-                    }
-                 );
-            });
-        });
-
-        
-    </script>
+    <script src="Scripts/loading-bar.min.js"></script>
+    <!--<script src="Scripts/loading-bar.js"></script>-->
+    <script src="Javascripts/Modules/module.js"></script>
+    <script src="Javascripts/Routes/route.js"></script>
+    <script src="Javascripts/Controllers/controller.js"></script>
+    <script src="Javascripts/Factories/factory.js"></script>
+    <script src="Javascripts/Menu/menu.js"></script>
 
 </head>
 <body ng-controller="mainController">
-                                                              
+            
+    <!--Load progress-->
+    <div id="loadProgress" class="progressdiv">
+        <div class="spinner"></div>
+        <div class="progresstext">Loading.... Please wait...</div>
+    </div>
+                                                      
     <div class="container">
         <!-- HEADER AND NAVBAR -->
-        <h3>Human Resource Management System</h3>
+        <h2>Human Resource Management System</h2>
         <ul class="nav nav-tabs">
             <li id="mainmenu1"><a href="#home">Home</a></li>
             <li id="mainmenu2"><a href="#employeelist">Employees</a></li>
@@ -82,9 +50,22 @@
 
         <!-- MAIN CONTENT AND INJECTED VIEWS -->
         <div id="mainContainer" style="padding-top:5px;">
-
-            <div id="viewContainer" ng-view></div>
-
+            <!--Load progress-->
+            <div id="loadProgressX" style="display:none;">
+                <div class="spinner"></div> Loading.... Please wait...
+            </div>
+            
+            <!--View Container-->
+            <div id="viewContainer" ng-view></div> 
+            
+            <!--Error Message-->
+            <div id="errorMessage" style="display:none;">
+                An Error occured while loading...
+            </div>
+            <!--No Data Found Message-->
+            <div id="noDataFound" style="display:none;">
+                No data found..
+            </div>    
         </div>
 
     </div>

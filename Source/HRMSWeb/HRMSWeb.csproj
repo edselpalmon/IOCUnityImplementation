@@ -70,12 +70,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loading-bar.css" />
+    <Content Include="Content\loading-bar.min.css" />
     <Content Include="Content\style.css" />
-    <Content Include="Factories\factory.js" />
+    <Content Include="Javascripts\Factories\factory.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\18.jpg" />
     <Content Include="Images\xx18.jpg" />
     <Content Include="Images\yy.jpg" />
+    <Content Include="Javascripts\Menu\menu.js" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -862,6 +865,8 @@
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <Content Include="Scripts\loading-bar.js" />
+    <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Scripts\version.json" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
@@ -885,10 +890,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Controllers\controller.js" />
+    <Content Include="Javascripts\Controllers\controller.js" />
     <Content Include="index.html" />
-    <Content Include="Modules\module.js" />
-    <Content Include="Routes\route.js" />
+    <Content Include="Javascripts\Modules\module.js" />
+    <Content Include="Javascripts\Routes\route.js" />
     <Content Include="Views\about.html" />
     <Content Include="Views\contact.html" />
     <Content Include="Views\Employee\employee_detail.html" />
