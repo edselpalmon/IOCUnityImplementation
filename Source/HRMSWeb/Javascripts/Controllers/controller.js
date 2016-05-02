@@ -26,7 +26,6 @@ HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService
     mainService.PostData($scope.URL, $scope.param)
         .then(function (data) {
             $scope.Employee = data;
-            console.log(data);
             if (data.EmployeeId > 0) {
                 $("#employeeDetail").show();
             }
@@ -47,8 +46,6 @@ HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', function ($s
     //$scope.URL = "http://localhost/HRMSService/EmployeeService/GetEmployees";
 
     $("#loadProgress").show();
-
-    console.log($(".nav-tabs"));
 
     $scope.URL = "http://localhost:55640/EmployeeService/GetEmployees";
     mainService.PostData($scope.URL, $scope.param)

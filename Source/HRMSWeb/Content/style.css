@@ -4,11 +4,11 @@
 
 body{
     color:whitesmoke;
-    background: navy; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(navy, lightblue); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(navy, lightblue); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(navy, lightblue); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to top bottom, navy, lightblue); /* Standard syntax */
+    background: #003972; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#003972, lightblue); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#003972, lightblue); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#003972, lightblue); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to top bottom, #003972, lightblue); /* Standard syntax */
 }   
  
 .disabled{
@@ -26,19 +26,19 @@ h3{
 
 table {
         border-collapse:separate;
-        border:solid gray 1px;
+        border:solid #011427 1px;
         border-radius:10px;
         -moz-border-radius:10px;
     }
 
     td, th{
-        border-left:solid gray 1px;
-        border-top:solid gray 1px;
+        border-left:solid #011427 1px;
+        border-top:solid #011427 1px;
         padding:5px;
     }
 
     th {
-        background-color:darkgreen;
+        background-color:navy;
         border-top: none;
         color:antiquewhite;
     }
@@ -57,10 +57,14 @@ table {
          border-left: none;
     }
 
+    a {
+        color:#011427;
+    }
+        
     input {
-        border-radius: 6px;
-        -moz-border-radius: 6px;
-        background-color:transparent;
+        color:#011427;
+        font:bold;
+        padding:2px;
     }
 
 .progressdiv {
