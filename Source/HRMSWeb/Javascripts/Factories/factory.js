@@ -18,3 +18,40 @@
         }
     }
 });
+
+HRMSWeb.factory('menuSelectorService', function () {    
+
+    return {
+        MenuSelector:  function (menu) {
+
+            $("#noDataFound").hide();
+            $("#errorMessage").hide();
+
+            $('[id^="mainmenu"]').each(function () {
+                if ($(this).html().indexOf('#' + menu) > 0) {
+                    $(this).addClass("active");
+                }
+                else {
+                    $(this).removeClass("active");
+                }
+            })
+        }
+    }    
+    
+});
+
+HRMSWeb.factory('userData', function () {
+
+    var userdata;
+    return {
+        SetUser: function (data) {
+            console.log(data);
+            userdata = data;
+        },
+        GetUser: function(){
+            console.log("asasasa:" + userdata);
+            return userdata;
+        }
+    }
+
+});

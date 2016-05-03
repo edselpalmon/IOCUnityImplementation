@@ -2,6 +2,7 @@
 
     var currentLocation = $(location).attr("href");
     var selectedMenu = currentLocation.substring(currentLocation.indexOf("#/") + 2);
+
     if (selectedMenu.indexOf("?") > 0) {
         selectedMenu = selectedMenu.substring(0, selectedMenu.indexOf("?"));
     }
@@ -10,15 +11,12 @@
 
         //handler for re-selecting the current selected menu when refreshed button is clicked.
         if (selectedMenu == "") {
-            $("#mainmenu1").addClass("active");
+            $("#mainmenu0").addClass("active");
         }
         else if ($(this).html().indexOf(selectedMenu) > 0) {
             $(this).addClass("active");
-        }
-        else if ($(this).html().indexOf(selectedMenu) > 0) {
-            $(this).addClass("active");
-        }
-
+        }        
+       
         $(this).click(
             function () {
                 //to make sure the div messages won't display on initial load of the view

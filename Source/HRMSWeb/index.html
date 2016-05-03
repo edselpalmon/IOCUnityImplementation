@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>HRMS Web Application</title>
     <link rel="stylesheet" href="/Content/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/Content/loading-bar.min.css" />
+    <!--<link rel="stylesheet" href="/Content/loading-bar.min.css" />-->
     <!--<link rel="stylesheet" href="/Content/loading-bar.css" />-->
     <link rel="stylesheet" href="/Content/style.css" />
     <script src="Scripts/jquery-2.2.3.min.js"></script>
@@ -12,17 +12,16 @@
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/angular-animate.min.js"></script>
     <script src="Scripts/angular-route.js"></script>
-    <script src="Scripts/loading-bar.min.js"></script>
+    <!--<script src="Scripts/loading-bar.min.js"></script>-->
     <!--<script src="Scripts/loading-bar.js"></script>-->
     <script src="Javascripts/Modules/module.js"></script>
     <script src="Javascripts/Routes/route.js"></script>
     <script src="Javascripts/Controllers/controller.js"></script>
     <script src="Javascripts/Factories/factory.js"></script>
-    <script src="Javascripts/Menu/menu.js"></script>
+    <!--<script src="Javascripts/Menu/menu.js"></script>-->
 
 </head>
-<body ng-controller="mainController">
-            
+<body>
     <!--Load progress-->
     <div id="loadProgress" class="progressdiv">
         <div class="spinner"></div>
@@ -33,6 +32,7 @@
         <!-- HEADER AND NAVBAR -->
         <h2>Human Resource Management System</h2>
         <ul class="nav nav-tabs">
+            <li id="mainmenu0"><a href="#login">User Login</a></li>
             <li id="mainmenu1"><a href="#home">Home</a></li>
             <li id="mainmenu2"><a href="#employeelist">Employees</a></li>
             <li id="mainmenu3"><a href="#employeedetail">Employee Detail</a></li>

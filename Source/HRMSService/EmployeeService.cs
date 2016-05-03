@@ -8,6 +8,13 @@ namespace HRMSService
     public class EmployeeService : IEmployeeService
     {
 
+
+        public User Authenticate()  //fake auth
+        {
+            var userinfo = new User { UserName="edselle23", UserRole="Admin", FirstName="Edsel", LastName="Palmon" };
+            return userinfo;
+        }
+
         //note: EmployeeInformation is a datacontract. IEmployeeInformation is the interface of Employeeinformation Entity
         public EmployeeInformation GetEmployeeById(int EmployeeId)
         {

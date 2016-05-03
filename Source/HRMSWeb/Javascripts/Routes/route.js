@@ -5,14 +5,20 @@ HRMSWeb.config(['$routeProvider', function ($routeProvider) {
 
         // route for the home page
         .when('/', {
-            templateUrl: 'Views/home.html',
-            controller: 'mainController',
+            templateUrl: 'Views/Login/login.html',
+            controller: 'loginController',
+        })
+
+        // route for the home page
+        .when('/login', {
+            templateUrl: 'Views/Login/login.html',
+            controller: 'loginController',
         })
 
         .when('/home', {
             templateUrl: 'Views/home.html',
             controller: 'mainController'
-        })                                               
+        })
 
         // route for the about page
         .when('/about', {
@@ -25,7 +31,7 @@ HRMSWeb.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'Views/contact.html',
             controller: 'contactController'
         })
-    
+
         .when('/employeedetail', {
             templateUrl: 'Views/Employee/employee_detail.html',
             controller: 'EmployeeController'
@@ -36,3 +42,6 @@ HRMSWeb.config(['$routeProvider', function ($routeProvider) {
             controller: 'EmployeesController'
         });
 }]);
+//.run (function ($rootScope) {
+//    $rootScope.User = [];
+//});

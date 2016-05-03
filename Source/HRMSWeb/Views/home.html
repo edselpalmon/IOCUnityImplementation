@@ -1,5 +1,8 @@
-﻿<div>
+﻿<div id="userInfo">
     <h3>Home Page</h3>
-
+    <p>
+        Welcome {{ User.FirstName }} {{ User.LastName }}<br/> 
+        You're role is: {{ User.UserRole }}     
+    </p>
     <p>{{ message }}</p>
 </div>

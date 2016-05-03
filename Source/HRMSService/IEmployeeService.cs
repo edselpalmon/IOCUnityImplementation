@@ -25,5 +25,13 @@ namespace HRMSService
           BodyStyle = WebMessageBodyStyle.Bare,
           Method = "POST")]
         IList<EmployeeInformation> GetEmployees();
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "Authenticate",
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json,
+          BodyStyle = WebMessageBodyStyle.Bare,
+          Method = "POST")]
+        User Authenticate();
     }
 }
