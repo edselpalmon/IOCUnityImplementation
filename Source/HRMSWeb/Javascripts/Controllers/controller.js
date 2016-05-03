@@ -17,7 +17,7 @@ HRMSWeb.controller('contactController', function ($scope) {
 
 HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService', function ($scope, $routeParams, mainService) {
     //deployed URI service 
-    //$scope.URL = "http://localhost/HRMSService/EmployeeService/GetEmployeeById";
+    //$scope.URL = "https://localhost/HRMSService/EmployeeService/GetEmployeeById";
     
     $("#loadProgress").show();
 
@@ -43,7 +43,7 @@ HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService
 
 HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', function ($scope, mainService) {
     //deployed URI service 
-    //$scope.URL = "http://localhost/HRMSService/EmployeeService/GetEmployees";
+    //$scope.URL = "https://localhost/HRMSService/EmployeeService/GetEmployees";
 
     $("#loadProgress").show();
 
