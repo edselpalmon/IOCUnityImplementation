@@ -1,9 +1,9 @@
-﻿<div>
-    <h1>Employee Information</h1>
-    First Name: {{Employee.FirstName}}<br/>
-    Middle Name: {{Employee.MiddleName}}<br />
-    Last Name: {{Employee.LastName}}
+﻿<div id="employeeDetail" style="display:none;">
+    <h3>Employee Information Detail</h3>
     <table>
+        <tr>
+            <th colspan="2">Personal Information</th>
+        </tr>
         <tr>
             <td>First Name:</td>
             <td><input type="text" ng-model="Employee.FirstName" /></td>
