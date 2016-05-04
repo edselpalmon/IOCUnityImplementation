@@ -50,7 +50,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Local.config" />
     <EmbeddedResource Include="packages.config" />
-    <None Include="Release.config" />
+    <EmbeddedResource Include="Release.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\ServiceInterfaces.csproj">

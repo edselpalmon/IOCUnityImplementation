@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace HRMSService.DataContracts
@@ -28,6 +29,12 @@ namespace HRMSService.DataContracts
         public string CivilStatus { get; set; }
         [DataMember]
         public string EducationalAttainment { get; set; }
+        [DataMember]
+        public IList<EmployeeAddress> EmployeeAddresses { get; set; }
+        [DataMember]
+        public IList<EmployementHistory> EmployementHistories { get; set; }
+        [DataMember]
+        public IList<EducationalBackground> EducationalBackgrounds { get; set; }
 
     }
 }
