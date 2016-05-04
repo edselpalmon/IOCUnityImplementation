@@ -26,8 +26,8 @@ HRMSWeb.factory('menuSelectorService', function () {
 
             $("#noDataFound").hide();
             $("#errorMessage").hide();
-
             $('[id^="mainmenu"]').each(function () {
+
                 if ($(this).html().indexOf('#' + menu) > 0) {
                     $(this).addClass("active");
                 }
@@ -40,17 +40,39 @@ HRMSWeb.factory('menuSelectorService', function () {
     
 });
 
-HRMSWeb.factory('userData', function () {
+HRMSWeb.factory('navMenuControllerService', function () {
 
-    var userdata;
     return {
-        SetUser: function (data) {
-            console.log(data);
-            userdata = data;
+        ToggleMenu: function (show) {
+
+            $('[id^="mainmenu"]').each(function () {
+                if (show)
+                {
+                    if ($(this).attr("id") != "mainmenu0") {
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                }
+                else
+                {
+                    if ($(this).attr("id") != "mainmenu0") {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show();
+                    }
+                }
+            })
         },
-        GetUser: function(){
-            console.log("asasasa:" + userdata);
-            return userdata;
+        HideAllMenu: function () {
+
+            $("#noDataFound").hide();
+            $("#errorMessage").hide();
+            $('[id^="mainmenu"]').each(function () {
+                $(this).hide();
+            })
         }
     }
 

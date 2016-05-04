@@ -1,7 +1,7 @@
 ﻿// create the controller and inject Angular's $scope
 
-HRMSWeb.controller('loginController', ['$scope', '$location', 'menuSelectorService', 'mainService', 'userData', '$rootScope',
-    function ($scope, $location, menuSelectorService, mainService, userData, $rootScope) {
+HRMSWeb.controller('loginController', ['$scope', '$location', 'menuSelectorService', 'mainService', '$window',
+function ($scope, $location, menuSelectorService, mainService, $window) {
 
     $scope.AppPath = 'login';
     menuSelectorService.MenuSelector($scope.AppPath);
@@ -16,10 +16,12 @@ HRMSWeb.controller('loginController', ['$scope', '$location', 'menuSelectorServi
         .then(function (data) {
             if (data.UserRole != "") {
 
-                $rootScope.User = data
-                //userData.SetUser(data);
-
+                $window.sessionStorage.setItem('UserInfo', JSON.stringify(data));
                 $("#userInfo").show();
+
+                var appPath = 'home';
+                $location.path('/' + appPath);
+                menuSelectorService.MenuSelector(appPath);
             }
             else {
                 $("#noDataFound").show();
@@ -30,25 +32,22 @@ HRMSWeb.controller('loginController', ['$scope', '$location', 'menuSelectorServi
         .finally(function () {
             $("#loadProgress").hide();
         });
-
-
-        var appPath = 'home';
-        $location.path('/' + appPath);
-        menuSelectorService.MenuSelector(appPath);
     };
 
    
 }]);
 
-HRMSWeb.controller('mainController', ['$scope', 'menuSelectorService', 'userData', '$rootScope',
-    function ($scope, menuSelectorService, userData, $rootScope) {
+HRMSWeb.controller('mainController', ['$scope', 'menuSelectorService', '$window', 'navMenuControllerService',
+    function ($scope, menuSelectorService, $window, navMenuControllerService) {
 
-    $scope.AppPath = 'home';
-    menuSelectorService.MenuSelector($scope.AppPath);
+        $scope.CurrentUser = JSON.parse($window.sessionStorage.getItem('UserInfo'));
 
-    $scope.message = 'Everyone come and see how good I look!';
+        $scope.AppPath = 'home';
+        menuSelectorService.MenuSelector($scope.AppPath);
 
-}]);
+        $scope.message = 'Everyone come and see how good I look!';
+
+    }]);
 
 HRMSWeb.controller('aboutController', ['$scope', 'menuSelectorService', function ($scope, menuSelectorService) {
 
@@ -125,5 +124,18 @@ HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', 'menuSelecto
         });
 
 }]);
+
+
+HRMSWeb.controller('logOutController', ['$scope', '$location', '$window',
+    function ($scope, $location, $window) {
+        delete $window.sessionStorage.clear();
+        $location.path('/login');
+    }]);
+
+HRMSWeb.controller('errorPageController', ['$scope', '$location', '$window',
+    function ($scope, $location, $window) {
+        $location.path('/error');
+    }]);
+
 
 

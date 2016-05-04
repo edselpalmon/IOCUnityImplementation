@@ -898,6 +898,7 @@
     <Content Include="Views\contact.html" />
     <Content Include="Views\Employee\employee_detail.html" />
     <Content Include="Views\Employee\employees.html" />
+    <Content Include="Views\ErrorPage\error.html" />
     <Content Include="Views\home.html" />
     <Content Include="Views\Login\login.html" />
     <Content Include="Web.config" />
