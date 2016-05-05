@@ -58,6 +58,7 @@
       <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -86,6 +87,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomUserValidator.cs" />
     <Compile Include="DataContracts\EducationalBackground.cs" />
     <Compile Include="DataContracts\EmployeeAddress.cs" />
     <Compile Include="DataContracts\EmployeeInformation.cs" />

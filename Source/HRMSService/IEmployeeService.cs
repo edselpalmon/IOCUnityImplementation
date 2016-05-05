@@ -9,7 +9,9 @@ namespace HRMSService
     [ServiceContract]
     public interface IEmployeeService
     {
-        
+        //string UserName { [OperationContract] get; [OperationContract] set; }
+        //string Password { [OperationContract] get; [OperationContract] set; }
+
         [OperationContract]
         [WebInvoke(UriTemplate = "GetEmployeeById",
           ResponseFormat = WebMessageFormat.Json,

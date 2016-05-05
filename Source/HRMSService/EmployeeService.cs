@@ -7,7 +7,13 @@ namespace HRMSService
 {
     public class EmployeeService : IEmployeeService
     {
+    //    public string UserName { get; set; }
+    //    public string Password { get; set; }
 
+        //public EmployeeService()
+        //{
+
+        //}
 
         public User Authenticate()  //fake auth
         {
