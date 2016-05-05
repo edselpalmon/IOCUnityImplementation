@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMSService", "HRMSService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityInterfaces", "EntityInterfaces\EntityInterfaces.csproj", "{E4889007-7175-4956-8E3A-63193D369522}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfHostedHRMSService", "SelfHostedHRMSService\SelfHostedHRMSService.csproj", "{4CEAF39C-908C-4B05-8646-26523F1D21EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService1", "WindowsService1\WindowsService1.csproj", "{CF6BD135-0234-4BF3-86BC-70D9444D56C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,14 @@ Global
 		{E4889007-7175-4956-8E3A-63193D369522}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4889007-7175-4956-8E3A-63193D369522}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4889007-7175-4956-8E3A-63193D369522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CEAF39C-908C-4B05-8646-26523F1D21EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CEAF39C-908C-4B05-8646-26523F1D21EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CEAF39C-908C-4B05-8646-26523F1D21EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CEAF39C-908C-4B05-8646-26523F1D21EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF6BD135-0234-4BF3-86BC-70D9444D56C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF6BD135-0234-4BF3-86BC-70D9444D56C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF6BD135-0234-4BF3-86BC-70D9444D56C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF6BD135-0234-4BF3-86BC-70D9444D56C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
