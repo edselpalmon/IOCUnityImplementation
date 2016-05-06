@@ -1,7 +1,7 @@
 ﻿// create the controller and inject Angular's $scope
 
-HRMSWeb.controller('loginController', ['$scope', '$location', 'menuSelectorService', 'mainService', '$window',
-function ($scope, $location, menuSelectorService, mainService, $window) {
+HRMSWeb.controller('loginController', ['$scope', '$location', 'menuSelectorService', 'mainService', '$window', 'base64',
+function ($scope, $location, menuSelectorService, mainService, $window, base64) {
 
     $scope.AppPath = 'login';
     menuSelectorService.MenuSelector($scope.AppPath);
@@ -9,10 +9,9 @@ function ($scope, $location, menuSelectorService, mainService, $window) {
     $scope.UserLogin = function () {
 
         $("#loadProgress").show();
-
-        $scope.URL = "http://localhost:55640/EmployeeService/Authenticate";
+        $scope.URL = "http://localhost:9999/TestService/Authenticate"; //"https://localhost/HRMSService/EmployeeService/Authenticate";//"http://localhost:55640/EmployeeService/Authenticate";
         $scope.param = "";
-        mainService.PostData($scope.URL, $scope.param)
+        mainService.PostData($scope.URL, $scope.param, 'edsel:test')
         .then(function (data) {
             if (data.UserRole != "") {
 

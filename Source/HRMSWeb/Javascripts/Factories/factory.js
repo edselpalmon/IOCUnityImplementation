@@ -1,7 +1,8 @@
-﻿HRMSWeb.factory('mainService', function ($http, $q) {
+﻿HRMSWeb.factory('mainService', function ($http, $q, base64) {
     return {
-        PostData: function (URL, param) {
+        PostData: function (URL, param, userinfo) {
             var deferred = $q.defer();
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + base64.encode(userinfo);
             $http({
                 url: URL,
                 method: "POST",
