@@ -13,6 +13,8 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
+using System.ServiceModel.Configuration;
+using System.ServiceModel.Activation;
 
 namespace WindowsService1
 {
@@ -24,11 +26,10 @@ namespace WindowsService1
         {
             InitializeComponent();
         }
-
+               
         protected override void OnStart(string[] args)
         {
-            var securityValidator = new CustomUserValidator();
-            string serviceAddress = "http://localhost:9999/TestService";
+            string serviceAddress = "http://localhost:9999/TestService/";
             Uri baseAddress = new Uri(serviceAddress);
             if (serviceHost != null)
             {
@@ -36,21 +37,29 @@ namespace WindowsService1
             }
 
             serviceHost = new ServiceHost(typeof(TestService), baseAddress);
-            serviceHost.Credentials.UserNameAuthentication.UserNamePasswordValidationMode = UserNamePasswordValidationMode.Custom;
-            serviceHost.Credentials.UserNameAuthentication.CustomUserNamePasswordValidator = securityValidator;
 
-            //var webhttp = new WebHttpBinding(WebHttpSecurityMode.None);
-            var webhttp = new WebHttpBinding(WebHttpSecurityMode.TransportCredentialOnly);
-            webhttp.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            var webhttp = new WebHttpBinding(WebHttpSecurityMode.None);
+           
+            var smb = new ServiceMetadataBehavior();
+            smb.HttpGetEnabled = true;
 
             var serviceEndpoint = serviceHost.AddServiceEndpoint(typeof(ITestService), webhttp, serviceAddress);
-            serviceEndpoint.Behaviors.Add(new WebHttpBehavior());
-            //serviceEndpoint.Behaviors.Add(new EnableCrossOriginResourceSharingBehavior());
-            //serviceEndpoint.EndpointBehaviors.Add(new EnableCrossOriginResourceSharingBehavior());
+            foreach (ServiceEndpoint EP in serviceHost.Description.Endpoints)
+            {
+                EP.Behaviors.Add(new BehaviorAttribute());
+            }
 
+            //serviceHost.Authorization.ServiceAuthorizationManager = new RestAuthorizationManager();
+
+            var serviceBehavior = new WebHttpBehavior();
+            serviceEndpoint.Behaviors.Add(serviceBehavior);
+            //serviceEndpoint.Behaviors.Add(new ServerInterceptor());
+            serviceHost.Description.Behaviors.Add(smb);
+           
             serviceHost.Open();
         }
 
+       
         protected override void OnStop()
         {
             if (serviceHost != null)

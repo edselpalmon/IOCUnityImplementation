@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 
 namespace WindowsService1
@@ -13,5 +14,9 @@ namespace WindowsService1
           BodyStyle = WebMessageBodyStyle.Bare,
           Method = "POST")]
         User Authenticate();
+
+        //[WebInvoke(Method = "OPTIONS", UriTemplate = "*")]
+        //bool HandleHttpOptionsRequest();
+
     }
 }

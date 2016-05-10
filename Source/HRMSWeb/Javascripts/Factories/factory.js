@@ -2,12 +2,12 @@
     return {
         PostData: function (URL, param, userinfo) {
             var deferred = $q.defer();
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + base64.encode(userinfo);
             $http({
                 url: URL,
                 method: "POST",
                 data: param, //Data sent to server
                 contentType: "application/json; charset=utf-8",
+                headers: { 'Authorization': 'Basic ' + base64.encode(userinfo) },
                 dataType: "json"
             }).success(function (data) {
                 deferred.resolve(data);

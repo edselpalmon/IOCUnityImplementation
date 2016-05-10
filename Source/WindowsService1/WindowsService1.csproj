@@ -51,16 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomHeaderMessageInspector .cs" />
-    <Compile Include="CustomUserValidator.cs" />
-    <Compile Include="EnableCrossOriginResourceSharingBehavior.cs" />
+    <Compile Include="BehaviorAttribute.cs" />
     <Compile Include="ITestService.cs" />
+    <Compile Include="MessageInspector .cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ProjectInstaller.Designer.cs">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
+    <Compile Include="RestAuthorizationManager.cs" />
+    <Compile Include="ServerInterceptor.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -73,7 +74,9 @@
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">
