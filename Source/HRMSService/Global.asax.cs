@@ -22,6 +22,9 @@ namespace HRMSService
 
         protected void Application_Start(object sender, EventArgs e)
         {
+
+            RouteTable.Routes.Add(new ServiceRoute("EmployeeService", new WebServiceHostFactory(), typeof(EmployeeService)));
+
             DAL = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
             Logger = DependencyFactory.Resolve<ITransactionLogger>("TransactionLogger");
             DBSession = DAL.OpenHibernateSession<ISession>("HRMSDB");
@@ -35,8 +38,6 @@ namespace HRMSService
             });
 
             Mapper = config.CreateMapper();
-
-            RouteTable.Routes.Add(new ServiceRoute("EmployeeService", new WebServiceHostFactory(), typeof(EmployeeService)));
         }
 
         protected void Session_Start(object sender, EventArgs e)
