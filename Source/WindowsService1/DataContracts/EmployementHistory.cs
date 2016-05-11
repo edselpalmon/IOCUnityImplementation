@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace HRMSService.DataContracts
+namespace WindowsService1.DataContracts
 {
     public class EmployementHistory
     {

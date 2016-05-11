@@ -33,6 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
@@ -51,6 +63,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContracts\EducationalBackground.cs" />
+    <Compile Include="DataContracts\EmployeeAddress.cs" />
+    <Compile Include="DataContracts\EmployeeInformation.cs" />
+    <Compile Include="DataContracts\EmployementHistory.cs" />
+    <Compile Include="DataContracts\User.cs" />
+    <Compile Include="EmployeeService.cs" />
+    <Compile Include="IEmployeeService.cs" />
     <Compile Include="ITestService.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
@@ -59,14 +78,14 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="RestAuthorizationManager.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Service1.Designer.cs">
       <DependentUpon>Service1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestService.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
@@ -74,6 +93,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">
@@ -81,10 +101,28 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DependencyFactory\IOCFactory.csproj">
+      <Project>{bd0272ad-cf2d-49f2-9beb-fd4f1092a37a}</Project>
+      <Name>IOCFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityInterfaces\EntityInterfaces.csproj">
+      <Project>{e4889007-7175-4956-8e3a-63193d369522}</Project>
+      <Name>EntityInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\ServiceInterfaces.csproj">
+      <Project>{faa61a43-6429-4041-a140-86094afaf2fd}</Project>
+      <Name>ServiceInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebHttpCors\WebHttpCors.csproj">
       <Project>{9045e552-71c6-497f-9c91-97906155c233}</Project>
       <Name>WebHttpCors</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="hibernate.cfg.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,30 +15,43 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Activation;
+using IOCFactory;
+using AutoMapper;
+using EntityInterfaces;
+using WindowsService1.DataContracts;
+using ServiceInterfaces;
 
 namespace WindowsService1
 {
     public partial class Service1 : ServiceBase
     {
-        ServiceHost serviceHost;
-        WebServiceHost webServiceHost;
-
+        private ServiceHost serviceHost1;
+        private ServiceHost serviceHost2;
+                                                                  
         public Service1()
         {
+
             InitializeComponent();
         }
 
 
         protected override void OnStart(string[] args)
         {
-            string serviceAddress = "http://localhost:9999/TestService/";
-            Uri baseAddress = new Uri(serviceAddress);
-            if (serviceHost != null)
+            var serviceAddress1 = "http://localhost:9999/TestService/";
+            var serviceAddress2 = "http://localhost:9999/HRMSService/";
+            var baseAddress1 = new Uri(serviceAddress1);
+            var baseAddress2 = new Uri(serviceAddress2);
+            if (serviceHost1 != null)
             {
-                serviceHost.Close();
+                serviceHost1.Close();
+            }
+            if (serviceHost2 != null)
+            {
+                serviceHost2.Close();
             }
 
-            serviceHost = new ServiceHost(typeof(TestService), baseAddress);
+            serviceHost1 = new ServiceHost(typeof(TestService), baseAddress1); 
+            serviceHost2 = new ServiceHost(typeof(EmployeeService), baseAddress2);
 
             //configuration was moved back to the app.config
 
@@ -48,7 +61,7 @@ namespace WindowsService1
             //smb.HttpGetEnabled = true;
 
             //var serviceEndpoint = serviceHost.AddServiceEndpoint(typeof(ITestService), webhttp, serviceAddress);
-            
+
             //serviceHost.Authorization.ServiceAuthorizationManager = new RestAuthorizationManager();
 
             //var serviceBehavior = new WebHttpBehavior();
@@ -56,14 +69,19 @@ namespace WindowsService1
             ////serviceEndpoint.Behaviors.Add(new ServerInterceptor());
             //serviceHost.Description.Behaviors.Add(smb);
 
-            serviceHost.Open();
+            serviceHost1.Open();
+            serviceHost2.Open();
         }
        
         protected override void OnStop()
         {
-            if (serviceHost != null)
+            if (serviceHost1 != null)
             {
-                serviceHost.Close();
+                serviceHost1.Close();
+            }
+            if (serviceHost2 != null)
+            {
+                serviceHost2.Close();
             }
         }
     }

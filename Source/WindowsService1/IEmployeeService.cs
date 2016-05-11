@@ -1,9 +1,9 @@
-﻿using HRMSService.DataContracts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
+using WindowsService1.DataContracts;
 
-namespace HRMSService
+namespace WindowsService1
 {
     [ServiceContract]
     public interface IEmployeeService

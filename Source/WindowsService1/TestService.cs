@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace WindowsService1
 {
-    public class TestService : ITestService
-
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
+    public class TestService : ITestService       
     {
         public User Authenticate()  //fake auth
         {

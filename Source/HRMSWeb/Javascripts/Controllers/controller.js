@@ -9,7 +9,8 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
     $scope.UserLogin = function () {
 
         $("#loadProgress").show();
-        $scope.URL = "http://localhost:9999/TestService/Authenticate"; 
+        //$scope.URL = "http://localhost:9999/TestService/Authenticate";
+        $scope.URL = "http://localhost:9999/HRMSService/Authenticate";
         //$scope.URL = "https://localhost/HRMSService/EmployeeService/Authenticate";
         //$scope.URL = "http://localhost:55640/EmployeeService/Authenticate";
         $scope.param = null;
@@ -18,6 +19,7 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
             .then(function (data) {
                 if (data.UserRole != "") {
 
+                    $window.sessionStorage.setItem('UserData', JSON.stringify($scope.User));
                     $window.sessionStorage.setItem('UserInfo', JSON.stringify(data));
                     $("#userInfo").show();
 
@@ -79,8 +81,10 @@ HRMSWeb.controller('contactController', ['$scope', 'menuSelectorService', functi
     $scope.message = 'Contact Us!';
 }]);
 
-HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService', 'menuSelectorService', function ($scope, $routeParams, mainService, menuSelectorService) {
+HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService', 'menuSelectorService', '$window',
+    function ($scope, $routeParams, mainService, menuSelectorService, $window) {
 
+    $scope.User = JSON.parse($window.sessionStorage.getItem('UserData'));
     $scope.AppPath = 'employeedetail';
     menuSelectorService.MenuSelector($scope.AppPath);
 
@@ -89,9 +93,10 @@ HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService
     
     $("#loadProgress").show();
 
-    $scope.URL = "http://localhost:55640/EmployeeService/GetEmployeeById";
+    //$scope.URL = "http://localhost:55640/EmployeeService/GetEmployeeById";
+    $scope.URL = "http://localhost:9999/HRMSService/GetEmployeeById";
     $scope.param = $routeParams.employeeId;
-    mainService.PostData($scope.URL, $scope.param)
+    mainService.PostData($scope.URL, $scope.param, $scope.User.UserName + ':' + $scope.User.Password)
         .then(function (data) {
             $scope.Employee = data;
             if (data.EmployeeId > 0) {
@@ -100,7 +105,7 @@ HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService
             else {
                 $("#noDataFound").show();
             } 
-        }, function() {
+        }, function (response) {
             $("#errorMessage").show();
         })
         .finally(function () {
@@ -109,18 +114,20 @@ HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService
 
 }]);
 
-HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', 'menuSelectorService', function ($scope, mainService, menuSelectorService) {
+HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', 'menuSelectorService', '$window',
+    function ($scope, mainService, menuSelectorService, $window) {
 
     $scope.AppPath = 'employeelist';
     menuSelectorService.MenuSelector($scope.AppPath);
-
+    $scope.User = JSON.parse($window.sessionStorage.getItem('UserData'));
     //deployed URI service 
     //$scope.URL = "https://localhost/HRMSService/EmployeeService/GetEmployees";
 
     $("#loadProgress").show();
 
-    $scope.URL = "http://localhost:55640/EmployeeService/GetEmployees";
-    mainService.PostData($scope.URL, $scope.param)
+    //$scope.URL = "http://localhost:55640/EmployeeService/GetEmployees";
+    $scope.URL = "http://localhost:9999/HRMSService/GetEmployees";
+    mainService.PostData($scope.URL, $scope.param, $scope.User.UserName + ':' + $scope.User.Password)
         .then(function (data) {
             $scope.Employees = data;
             if(data != null)
@@ -131,7 +138,7 @@ HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', 'menuSelecto
             {
                 $("#noDataFound").show();
             }
-        }, function() {
+        }, function () {
             $("#errorMessage").show();
         })
         .finally(function () {
