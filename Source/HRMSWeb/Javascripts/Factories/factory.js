@@ -10,9 +10,10 @@
                 headers: {'Authorization': 'Basic ' + base64.encode(userinfo)},
                 dataType: "json"
             }).success(function (data) {
+                console.log('pasok');
                 deferred.resolve(data);
-            }).error(function (e) {
-                deferred.reject();
+            }).error(function (response, status) {
+                deferred.reject("Status Code: " + status);
             });
 
             return deferred.promise;

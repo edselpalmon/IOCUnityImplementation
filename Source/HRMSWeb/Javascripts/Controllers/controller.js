@@ -13,27 +13,40 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
         //$scope.URL = "https://localhost/HRMSService/EmployeeService/Authenticate";
         //$scope.URL = "http://localhost:55640/EmployeeService/Authenticate";
         $scope.param = null;
-        console.log($scope.User);
-        mainService.PostData($scope.URL, $scope.param, $scope.User.UserName + ':' + $scope.User.Password)
-        .then(function (data) {
-            if (data.UserRole != "") {
+        if ($scope.User != null) {
+            mainService.PostData($scope.URL, $scope.param, $scope.User.UserName + ':' + $scope.User.Password)
+            .then(function (data) {
+                if (data.UserRole != "") {
 
-                $window.sessionStorage.setItem('UserInfo', JSON.stringify(data));
-                $("#userInfo").show();
+                    $window.sessionStorage.setItem('UserInfo', JSON.stringify(data));
+                    $("#userInfo").show();
 
-                var appPath = 'home';
-                $location.path('/' + appPath);
-                menuSelectorService.MenuSelector(appPath);
-            }
-            else {
-                $("#noDataFound").show();
-            }
-        }, function () {
+                    var appPath = 'home';
+                    $location.path('/' + appPath);
+                    menuSelectorService.MenuSelector(appPath);
+                }
+                else {
+                    $("#noDataFound").show();
+                }
+            }, function (response) {
+                if (response == "Status Code: 401") {
+                    $("#errorMessage").text("Invalid Login... Please try again...");
+                }
+                else {
+                    $("#errorMessage").text("An Error occured while loading...");
+                }
+                $("#errorMessage").show();
+            })
+            .finally(function () {
+                $("#loadProgress").hide();
+            });
+        }
+        else
+        {
+            $("#errorMessage").text("User Name and Password is required.");
             $("#errorMessage").show();
-        })
-        .finally(function () {
             $("#loadProgress").hide();
-        });
+        }
     };
 
    
