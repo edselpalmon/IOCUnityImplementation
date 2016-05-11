@@ -13,8 +13,8 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
         //$scope.URL = "https://localhost/HRMSService/EmployeeService/Authenticate";
         //$scope.URL = "http://localhost:55640/EmployeeService/Authenticate";
         $scope.param = null;
-        //mainService.PostData($scope.URL, $scope.param, 'rcgitmanila\\evpalmon:')
-        mainService.PostData($scope.URL, $scope.param, 'edsel:test')
+        console.log($scope.User);
+        mainService.PostData($scope.URL, $scope.param, $scope.User.UserName + ':' + $scope.User.Password)
         .then(function (data) {
             if (data.UserRole != "") {
 

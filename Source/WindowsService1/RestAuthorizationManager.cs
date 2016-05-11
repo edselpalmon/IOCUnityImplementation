@@ -22,6 +22,8 @@ namespace WindowsService1
                 IncomingWebRequestContext request = WebOperationContext.Current.IncomingRequest;
                 string headers = request.Headers["Authorization"];
 
+                if (request.Method == "OPTIONS") return true; //added this is for proper preflight handling
+
                 //Extract the Authorization header, and parse out the credentials converting the Base64 string:  
                 var authHeader = WebOperationContext.Current.IncomingRequest.Headers["Authorization"];
                 if ((authHeader != null) && (authHeader != string.Empty))

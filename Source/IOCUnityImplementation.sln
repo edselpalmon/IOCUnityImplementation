@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfHostedHRMSService", "Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService1", "WindowsService1\WindowsService1.csproj", "{CF6BD135-0234-4BF3-86BC-70D9444D56C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHttpCors", "WebHttpCors\WebHttpCors.csproj", "{9045E552-71C6-497F-9C91-97906155C233}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{CF6BD135-0234-4BF3-86BC-70D9444D56C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF6BD135-0234-4BF3-86BC-70D9444D56C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF6BD135-0234-4BF3-86BC-70D9444D56C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9045E552-71C6-497F-9C91-97906155C233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9045E552-71C6-497F-9C91-97906155C233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9045E552-71C6-497F-9C91-97906155C233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9045E552-71C6-497F-9C91-97906155C233}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

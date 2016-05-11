@@ -21,12 +21,14 @@ namespace WindowsService1
     public partial class Service1 : ServiceBase
     {
         ServiceHost serviceHost;
+        WebServiceHost webServiceHost;
 
         public Service1()
         {
             InitializeComponent();
         }
-               
+
+
         protected override void OnStart(string[] args)
         {
             string serviceAddress = "http://localhost:9999/TestService/";
@@ -38,27 +40,24 @@ namespace WindowsService1
 
             serviceHost = new ServiceHost(typeof(TestService), baseAddress);
 
-            var webhttp = new WebHttpBinding(WebHttpSecurityMode.None);
-           
-            var smb = new ServiceMetadataBehavior();
-            smb.HttpGetEnabled = true;
+            //configuration was moved back to the app.config
 
-            var serviceEndpoint = serviceHost.AddServiceEndpoint(typeof(ITestService), webhttp, serviceAddress);
-            foreach (ServiceEndpoint EP in serviceHost.Description.Endpoints)
-            {
-                EP.Behaviors.Add(new BehaviorAttribute());
-            }
+            //var webhttp = new WebHttpBinding(WebHttpSecurityMode.None);
 
+            //var smb = new ServiceMetadataBehavior();
+            //smb.HttpGetEnabled = true;
+
+            //var serviceEndpoint = serviceHost.AddServiceEndpoint(typeof(ITestService), webhttp, serviceAddress);
+            
             //serviceHost.Authorization.ServiceAuthorizationManager = new RestAuthorizationManager();
 
-            var serviceBehavior = new WebHttpBehavior();
-            serviceEndpoint.Behaviors.Add(serviceBehavior);
-            //serviceEndpoint.Behaviors.Add(new ServerInterceptor());
-            serviceHost.Description.Behaviors.Add(smb);
-           
+            //var serviceBehavior = new WebHttpBehavior();
+            //serviceEndpoint.Behaviors.Add(serviceBehavior);
+            ////serviceEndpoint.Behaviors.Add(new ServerInterceptor());
+            //serviceHost.Description.Behaviors.Add(smb);
+
             serviceHost.Open();
         }
-
        
         protected override void OnStop()
         {
