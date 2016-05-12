@@ -14,7 +14,7 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
         //$scope.URL = "https://localhost/HRMSService/EmployeeService/Authenticate";
         //$scope.URL = "http://localhost:55640/EmployeeService/Authenticate";
         $scope.param = null;
-        if ($scope.User != null) {
+        if ($scope.User != null && $scope.User.UserName != "" && $scope.User.Password != "") {
             mainService.PostAuthorization($scope.URL, $scope.param, $scope.User.UserName + ':' + $scope.User.Password)
             .then(function (data) {
                 if (data.UserRole != "") {
@@ -41,6 +41,7 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
             })
             .finally(function () {
                 $("#loadProgress").hide();
+                $("#noDataFound").hide();
             });
         }
         else
@@ -48,6 +49,7 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
             $("#errorMessage").text("User Name and Password is required.");
             $("#errorMessage").show();
             $("#loadProgress").hide();
+            $("#noDataFound").hide();
         }
     };
 
