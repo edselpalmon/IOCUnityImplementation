@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
-using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
+using WindowsService1.DataContracts;
 
 namespace WindowsService1
 {

@@ -31,6 +31,8 @@
       <one-to-many class="EducationalBackground"/>
     </bag>
 
+    <one-to-one name ="User" lazy="false" class ="User" property-ref="EmployeeInformation"/>
+
     <subclass name="EmployeeInformation" discriminator-value="EmployeeInformation">
     </subclass>
     
