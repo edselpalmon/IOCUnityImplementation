@@ -46,6 +46,7 @@
     <Compile Include="IEmployeeInformation.cs" />
     <Compile Include="IEmployementHistory.cs" />
     <Compile Include="ITestTable.cs" />
+    <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

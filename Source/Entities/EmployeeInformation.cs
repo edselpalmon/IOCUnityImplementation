@@ -20,5 +20,7 @@ namespace Entities
         public virtual IList<IEmployeeAddress> EmployeeAddresses { get; set; }
         public virtual IList<IEmployementHistory> EmployementHistories { get; set; }
         public virtual IList<IEducationalBackground> EducationalBackgrounds { get; set; }
+        public virtual IUser User { get; set; }
+
     }
 }

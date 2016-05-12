@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService1", "WindowsS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHttpCors", "WebHttpCors\WebHttpCors.csproj", "{9045E552-71C6-497F-9C91-97906155C233}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tokenizer", "Tokenizer\Tokenizer.csproj", "{D5E21F37-B312-4C29-8252-4AB82CC452BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{9045E552-71C6-497F-9C91-97906155C233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9045E552-71C6-497F-9C91-97906155C233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9045E552-71C6-497F-9C91-97906155C233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5E21F37-B312-4C29-8252-4AB82CC452BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5E21F37-B312-4C29-8252-4AB82CC452BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5E21F37-B312-4C29-8252-4AB82CC452BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E21F37-B312-4C29-8252-4AB82CC452BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

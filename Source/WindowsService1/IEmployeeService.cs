@@ -31,5 +31,13 @@ namespace WindowsService1
           BodyStyle = WebMessageBodyStyle.Bare,
           Method = "POST")]
         User Authenticate();
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "Logout",
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json,
+          BodyStyle = WebMessageBodyStyle.Bare,
+          Method = "POST")]
+        void Logout();
     }
 }
