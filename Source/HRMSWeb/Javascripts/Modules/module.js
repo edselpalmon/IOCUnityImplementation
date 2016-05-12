@@ -1,6 +1,6 @@
 ﻿// create the module and name HRMSWeb
 //var HRMSWeb = angular.module('HRMSWeb', ['ngRoute', 'angular-loading-bar'])
-var HRMSWeb = angular.module('HRMSWeb', ['ngRoute'])
+var HRMSWeb = angular.module('HRMSWeb', ['ngRoute','utf8-base64'])
 
 .run(function ($rootScope, $window, $location, menuSelectorService, navMenuControllerService) {
 
