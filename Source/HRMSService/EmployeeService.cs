@@ -7,8 +7,7 @@ namespace HRMSService
 {
     public class EmployeeService : IEmployeeService
     {
-
-
+    
         public User Authenticate()  //fake auth
         {
             var userinfo = new User { UserName="edselle23", UserRole="Admin", FirstName="Edsel", LastName="Palmon" };

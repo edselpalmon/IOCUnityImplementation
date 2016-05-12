@@ -1,17 +1,18 @@
-﻿HRMSWeb.factory('mainService', function ($http, $q) {
+﻿HRMSWeb.factory('mainService', function ($http, $q, base64) {
     return {
-        PostData: function (URL, param) {
+        PostData: function (URL, param, userinfo) {
             var deferred = $q.defer();
             $http({
                 url: URL,
                 method: "POST",
                 data: param, //Data sent to server
                 contentType: "application/json; charset=utf-8",
+                headers: {'Authorization': 'Basic ' + base64.encode(userinfo)},
                 dataType: "json"
             }).success(function (data) {
                 deferred.resolve(data);
-            }).error(function (e) {
-                deferred.reject();
+            }).error(function (response, status) {
+                deferred.reject("Status Code: " + status);
             });
 
             return deferred.promise;
