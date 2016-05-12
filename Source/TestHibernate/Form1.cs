@@ -59,6 +59,10 @@ namespace TestHibernate
         {
             _db.OpenHibernateSession<ISession>("HRMSDB");
 
+            var y = _db.GetRecords<IEmployeeInformation>();
+
+            var x = _db.GetRecords<IUser>();
+
             var id = Int64.Parse(txtDisplayChannel.Text);
             txtDisplayChannel.Clear();
             var tmpText ="";

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Entities" namespace="Entities">
+  <class name="EntityInterfaces.IUser, EntityInterfaces" table="UserInformation" dynamic-update="true">
+    <id name="UserId" column="UserId" type="Int64" unsaved-value="0">
+      <generator class="identity" />
+    </id>
+    <discriminator column="NHDiscriminator" type="string"/>
+    <property name="Username" type="string" length="20" not-null="true"/>
+    <property name="Password" type="string" length="20" not-null="true"/>
+    <property name="UserToken" type="string" length="500" not-null="false"/>
+    <property name="UserRole" type="string" length="50" not-null="false"/>
+    <property name="TokenExpiryDate" type="DateTime"  not-null="false"/>
+    <many-to-one name="EmployeeInformation" class="EmployeeInformation" column="EmployeeId" unique="true" not-null="false" cascade="all"/>
+    <subclass name="User" discriminator-value="User">
+    </subclass>
+  </class>
+</hibernate-mapping>
+
+

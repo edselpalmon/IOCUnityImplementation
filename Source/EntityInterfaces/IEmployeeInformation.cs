@@ -19,5 +19,6 @@ namespace EntityInterfaces
         IList<IEmployeeAddress> EmployeeAddresses { get; set; }
         IList<IEmployementHistory> EmployementHistories { get; set; }
         IList<IEducationalBackground> EducationalBackgrounds { get; set; }
+        IUser User { get; set; }
     }
 }
