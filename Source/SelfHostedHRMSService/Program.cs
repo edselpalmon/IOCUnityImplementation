@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Topshelf;
 
 namespace SelfHostedHRMSService
@@ -9,20 +8,28 @@ namespace SelfHostedHRMSService
         static void Main(string[] args)
         {
 
-            //HostFactory.Run(x =>
-            //{
-            //    x.SetDescription("Demonstration service for .NET nuts and bolts blog post.");
-            //    x.SetDisplayName("Demo Service");
-            //    x.SetServiceName("demoservice");
-            //    x.RunAsLocalSystem();
-            //    x.StartManually();
-            //    x.Service<MyService>(c =>
-            //    {
-            //        c.ConstructUsing(() => new MyService());
-            //        c.WhenStarted(d => d.StartService());
-            //        c.WhenStopped(d => d.StopService());
-            //    });
-            //});
+            var exitcode = HostFactory.Run(hostConfigurator =>
+            {
+                hostConfigurator.Service<HRMSService>(
+                    serviceConfigurator =>
+                    {
+                        serviceConfigurator.ConstructUsing(() => new HRMSService());
+                        serviceConfigurator.WhenStarted(myService => myService.Start());
+                        serviceConfigurator.WhenStopped(myService => myService.Stop());
+                    });
+
+                hostConfigurator.RunAsLocalSystem();
+                hostConfigurator.StartAutomatically();
+
+                hostConfigurator.SetDisplayName("HRMS WCF Service");
+                hostConfigurator.SetDescription("HRMS WCFS Service");
+                hostConfigurator.SetServiceName("HRMSWCFService");
+                hostConfigurator.EnableServiceRecovery(x => x.RestartService(1));
+            });
+
+            Console.WriteLine("Topshelf install/uninstall process exiting on code: " + exitcode);
+
+            Environment.Exit(0);
 
         }
     }
