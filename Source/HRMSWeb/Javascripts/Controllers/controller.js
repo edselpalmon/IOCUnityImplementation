@@ -9,8 +9,8 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
     $scope.UserLogin = function () {
 
         $("#loadProgress").show();
-        //$scope.URL = "http://localhost:9999/TestService/Authenticate";
-        $scope.URL = "http://localhost:9999/HRMSService/Authenticate";
+        //$scope.URL = "https://localhost:9999/TestService/Authenticate";
+        $scope.URL = "https://localhost:9999/HRMSService/Authenticate";
         //$scope.URL = "https://localhost/HRMSService/EmployeeService/Authenticate";
         //$scope.URL = "http://localhost:55640/EmployeeService/Authenticate";
         $scope.param = null;
@@ -95,8 +95,8 @@ HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService
     
     $("#loadProgress").show();
 
-    //$scope.URL = "http://localhost:55640/EmployeeService/GetEmployeeById";
-    $scope.URL = "http://localhost:9999/HRMSService/GetEmployeeById";
+    //$scope.URL = "https://localhost:55640/EmployeeService/GetEmployeeById";
+    $scope.URL = "https://localhost:9999/HRMSService/GetEmployeeById";
     $scope.param = $routeParams.employeeId;
     mainService.PostData($scope.URL, $scope.param, $scope.User.UserToken)
         .then(function (data) {
@@ -127,8 +127,8 @@ HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', 'menuSelecto
 
     $("#loadProgress").show();
 
-    //$scope.URL = "http://localhost:55640/EmployeeService/GetEmployees";
-    $scope.URL = "http://localhost:9999/HRMSService/GetEmployees";
+    //$scope.URL = "https://localhost:55640/EmployeeService/GetEmployees";
+    $scope.URL = "https://localhost:9999/HRMSService/GetEmployees";
     mainService.PostData($scope.URL, $scope.param, $scope.User.UserToken)
     .then(function (data) {
         $scope.Employees = data;
@@ -153,7 +153,7 @@ HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', 'menuSelecto
 HRMSWeb.controller('logOutController', ['$scope', '$location', '$window', 'mainService',
     function ($scope, $location, $window, mainService) {
 
-        $scope.URL = "http://localhost:9999/HRMSService/Logout";
+        $scope.URL = "https://localhost:9999/HRMSService/Logout";
         $scope.User = JSON.parse($window.sessionStorage.getItem('UserInfo'));
 
         mainService.PostData($scope.URL, $scope.param, $scope.User.UserToken)

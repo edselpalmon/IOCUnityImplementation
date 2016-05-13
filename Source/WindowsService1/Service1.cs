@@ -38,8 +38,8 @@ namespace WindowsService1
         protected override void OnStart(string[] args)
         {
             _serviceHostList = new List<ServiceHost>();
-            _serviceHostList.Add(new ServiceHost(typeof(TestService), new Uri("http://localhost:9999/TestService/")));
-            _serviceHostList.Add(new ServiceHost(typeof(EmployeeService), new Uri("http://localhost:9999/HRMSService/")));
+            _serviceHostList.Add(new ServiceHost(typeof(TestService), new Uri("https://localhost:9999/TestService/")));
+            _serviceHostList.Add(new ServiceHost(typeof(EmployeeService), new Uri("https://localhost:9999/HRMSService/")));
 
             //open the ServiceHosts
             foreach (var serviceHost in _serviceHostList)
