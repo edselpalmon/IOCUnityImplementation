@@ -29,8 +29,6 @@ namespace SelfHostedHRMSService
 
             Console.WriteLine("Topshelf install/uninstall process exiting on code: " + exitcode);
 
-            Environment.Exit(0);
-
         }
     }
 }
