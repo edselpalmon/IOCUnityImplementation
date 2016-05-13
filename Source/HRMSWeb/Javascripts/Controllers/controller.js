@@ -1,7 +1,7 @@
 ﻿// create the controller and inject Angular's $scope
 
-HRMSWeb.controller('loginController', ['$scope', '$location', 'menuSelectorService', 'mainService', '$window', 'base64',
-function ($scope, $location, menuSelectorService, mainService, $window, base64) {
+HRMSWeb.controller('loginController', ['$scope', '$location', 'menuSelectorService', 'mainService', '$window', 'base64', 'myConstant',
+function ($scope, $location, menuSelectorService, mainService, $window, base64, myConstant) {
 
     $scope.AppPath = 'login';
     menuSelectorService.MenuSelector($scope.AppPath);
@@ -9,10 +9,7 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
     $scope.UserLogin = function () {
 
         $("#loadProgress").show();
-        //$scope.URL = "https://localhost:9999/TestService/Authenticate";
-        $scope.URL = "https://localhost:9999/HRMSService/Authenticate";
-        //$scope.URL = "https://localhost/HRMSService/EmployeeService/Authenticate";
-        //$scope.URL = "http://localhost:55640/EmployeeService/Authenticate";
+        $scope.URL = myConstant.baseurl2 + "/HRMSService/Authenticate";
         $scope.param = null;
         if ($scope.User != null && $scope.User.UserName != "" && $scope.User.Password != "") {
             mainService.PostAuthorization($scope.URL, $scope.param, $scope.User.UserName + ':' + $scope.User.Password)
@@ -44,8 +41,7 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
                 $("#noDataFound").hide();
             });
         }
-        else
-        {
+        else {
             $("#errorMessage").text("User Name and Password is required.");
             $("#errorMessage").show();
             $("#loadProgress").hide();
@@ -53,7 +49,7 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64) 
         }
     };
 
-   
+
 }]);
 
 HRMSWeb.controller('mainController', ['$scope', 'menuSelectorService', '$window', 'navMenuControllerService',
@@ -83,77 +79,68 @@ HRMSWeb.controller('contactController', ['$scope', 'menuSelectorService', functi
     $scope.message = 'Contact Us!';
 }]);
 
-HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService', 'menuSelectorService', '$window',
-    function ($scope, $routeParams, mainService, menuSelectorService, $window) {
+HRMSWeb.controller('EmployeeController', ['$scope', '$routeParams', 'mainService', 'menuSelectorService', '$window', 'myConstant',
+    function ($scope, $routeParams, mainService, menuSelectorService, $window, myConstant) {
 
         $scope.User = JSON.parse($window.sessionStorage.getItem('UserInfo'));
-    $scope.AppPath = 'employeedetail';
-    menuSelectorService.MenuSelector($scope.AppPath);
+        $scope.AppPath = 'employeedetail';
+        menuSelectorService.MenuSelector($scope.AppPath);
 
-    //deployed URI service 
-    //$scope.URL = "https://localhost/HRMSService/EmployeeService/GetEmployeeById";
-    
-    $("#loadProgress").show();
+        $("#loadProgress").show();
 
-    //$scope.URL = "https://localhost:55640/EmployeeService/GetEmployeeById";
-    $scope.URL = "https://localhost:9999/HRMSService/GetEmployeeById";
-    $scope.param = $routeParams.employeeId;
-    mainService.PostData($scope.URL, $scope.param, $scope.User.UserToken)
+        $scope.URL = myConstant.baseurl2 + "/HRMSService/GetEmployeeById";
+        $scope.param = $routeParams.employeeId;
+        mainService.PostData($scope.URL, $scope.param, $scope.User.UserToken)
+            .then(function (data) {
+                $scope.Employee = data;
+                if (data.EmployeeId > 0) {
+                    $("#employeeDetail").show();
+                }
+                else {
+                    $("#noDataFound").show();
+                }
+            }, function (response) {
+                $("#errorMessage").show();
+            })
+            .finally(function () {
+                $("#loadProgress").hide();
+            });
+
+    }]);
+
+HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', 'menuSelectorService', '$window', 'myConstant',
+    function ($scope, mainService, menuSelectorService, $window, myConstant) {
+
+        $scope.AppPath = 'employeelist';
+        menuSelectorService.MenuSelector($scope.AppPath);
+        $scope.User = JSON.parse($window.sessionStorage.getItem('UserInfo'));
+        $("#loadProgress").show();
+
+        $scope.URL = myConstant.baseurl2 + "/HRMSService/GetEmployees";
+
+        mainService.PostData($scope.URL, $scope.param, $scope.User.UserToken)
         .then(function (data) {
-            $scope.Employee = data;
-            if (data.EmployeeId > 0) {
-                $("#employeeDetail").show();
+            $scope.Employees = data;
+            if (data != null) {
+                $("#employeeList").show();
             }
             else {
                 $("#noDataFound").show();
-            } 
-        }, function (response) {
+            }
+        }, function () {
             $("#errorMessage").show();
         })
         .finally(function () {
             $("#loadProgress").hide();
         });
 
-}]);
-
-HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', 'menuSelectorService', '$window',
-    function ($scope, mainService, menuSelectorService, $window) {
-
-    $scope.AppPath = 'employeelist';
-    menuSelectorService.MenuSelector($scope.AppPath);
-    $scope.User = JSON.parse($window.sessionStorage.getItem('UserInfo'));
-    //deployed URI service 
-    //$scope.URL = "https://localhost/HRMSService/EmployeeService/GetEmployees";
-
-    $("#loadProgress").show();
-
-    //$scope.URL = "https://localhost:55640/EmployeeService/GetEmployees";
-    $scope.URL = "https://localhost:9999/HRMSService/GetEmployees";
-    mainService.PostData($scope.URL, $scope.param, $scope.User.UserToken)
-    .then(function (data) {
-        $scope.Employees = data;
-        if(data != null)
-        {
-            $("#employeeList").show();
-        }
-        else
-        {
-            $("#noDataFound").show();
-        }
-    }, function () {
-        $("#errorMessage").show();
-    })
-    .finally(function () {
-        $("#loadProgress").hide();                      
-    });
-
-}]);
+    }]);
 
 
-HRMSWeb.controller('logOutController', ['$scope', '$location', '$window', 'mainService',
-    function ($scope, $location, $window, mainService) {
+HRMSWeb.controller('logOutController', ['$scope', '$location', '$window', 'mainService', 'myConstant',
+    function ($scope, $location, $window, mainService, myConstant) {
 
-        $scope.URL = "https://localhost:9999/HRMSService/Logout";
+        $scope.URL = myConstant.baseurl2 + "/HRMSService/Logout";
         $scope.User = JSON.parse($window.sessionStorage.getItem('UserInfo'));
 
         mainService.PostData($scope.URL, $scope.param, $scope.User.UserToken)
