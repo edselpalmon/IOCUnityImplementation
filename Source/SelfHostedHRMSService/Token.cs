@@ -12,7 +12,7 @@ namespace SelfHostedHRMSService
 {
     public static class Token
     {
-        private static IHibernateDAL _DAL = DALSession.GetDAL();
+        private static IHibernateDAL _DAL = DALSession.DAL;
 
         public static IUser GenerateSessionToken(IUser userInfo)
         {

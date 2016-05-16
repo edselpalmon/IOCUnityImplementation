@@ -22,7 +22,7 @@ namespace SelfHostedHRMSService
 
         public EmployeeService()
         {
-            _DAL = DALSession.GetDAL();
+            _DAL = DALSession.DAL;
             _Mapper = Mapper.GetMapper();
         }
         

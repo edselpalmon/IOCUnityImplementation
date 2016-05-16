@@ -4,21 +4,43 @@ using ServiceInterfaces;
 
 namespace SelfHostedHRMSService
 {
-    public static class DALSession
+    //public class DALSession
+    //{
+    //    private static readonly IHibernateDAL _DAL;
+
+    //    public static IHibernateDAL GetDAL()
+    //    {
+    //        if (_DAL == null)
+    //        {
+    //            _DAL = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
+    //            _DAL.OpenHibernateSession<ISession>("HRMSDB");
+    //        }
+
+    //        return _DAL;
+    //    }
+
+    //}
+
+    public sealed class DALSession
     {
-        private static IHibernateDAL _DAL;
+        private static readonly DALSession _instance = new DALSession();
 
-        public static IHibernateDAL GetDAL()
+        public static IHibernateDAL DAL;
+
+        public static DALSession Instance
         {
-            if (_DAL == null)
-            {
-                _DAL = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
-                _DAL.OpenHibernateSession<ISession>("HRMSDB");
-            }
+           get { return _instance; }
+        }
 
-            return _DAL;
+        DALSession()
+        {
+            if (DAL == null)
+            {
+                DAL = DependencyFactory.Resolve<IHibernateDAL>("HibernateDAL");
+                DAL.OpenHibernateSession<ISession>("HRMSDB");
+            }
         }
 
     }
-      
+
 }
