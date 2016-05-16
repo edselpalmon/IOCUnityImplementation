@@ -1,29 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using SelfHostedHRMSService.DataContracts;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using SelfHostedHRMSService.DataContracts;
 
 namespace SelfHostedHRMSService
 {
     [ServiceContract]
-    public interface IEmployeeService
+    public interface IAuthenticationService
     {
         [OperationContract]
-        [WebInvoke(UriTemplate = "GetEmployeeById",
+        [WebInvoke(UriTemplate = "Authenticate",
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json,
           BodyStyle = WebMessageBodyStyle.Bare,
           Method = "POST")]
-        EmployeeInformation GetEmployeeById(int EmployeeId);
+        User Authenticate();
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "GetEmployees",
+        [WebInvoke(UriTemplate = "Logout",
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json,
           BodyStyle = WebMessageBodyStyle.Bare,
           Method = "POST")]
-        IList<EmployeeInformation> GetEmployees();
-
-   
+        void Logout();
     }
 }

@@ -9,7 +9,7 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64, 
     $scope.UserLogin = function () {
 
         $("#loadProgress").show();
-        $scope.URL = myConstant.baseurl2 + "/HRMSService/Authenticate";
+        $scope.URL = myConstant.baseurl2 + "/AuthenticationService/Authenticate";
         $scope.param = null;
         if ($scope.User != null && $scope.User.UserName != "" && $scope.User.Password != "") {
             mainService.PostAuthorization($scope.URL, $scope.param, $scope.User.UserName + ':' + $scope.User.Password)
@@ -38,6 +38,7 @@ function ($scope, $location, menuSelectorService, mainService, $window, base64, 
             })
             .finally(function () {
                 $("#loadProgress").hide();
+                $("#noDataFound").text("No data found..");
                 $("#noDataFound").hide();
             });
         }
@@ -140,7 +141,7 @@ HRMSWeb.controller('EmployeesController', ['$scope', 'mainService', 'menuSelecto
 HRMSWeb.controller('logOutController', ['$scope', '$location', '$window', 'mainService', 'myConstant',
     function ($scope, $location, $window, mainService, myConstant) {
 
-        $scope.URL = myConstant.baseurl2 + "/HRMSService/Logout";
+        $scope.URL = myConstant.baseurl2 + "/AuthenticationService/Logout";
         $scope.User = JSON.parse($window.sessionStorage.getItem('UserInfo'));
 
         mainService.PostData($scope.URL, $scope.param, $scope.User.UserToken)

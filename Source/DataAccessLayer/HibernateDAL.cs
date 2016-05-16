@@ -125,12 +125,19 @@ namespace DataAccessLayer
 
         public IList<T> GetRecords<T>()
         {
-            using (var trx = _session.BeginTransaction())
+            try
             {
-                var query = _session.CreateQuery("from " + typeof(T));
-                var records = query.List<T>();
-                trx.Commit();
-                return records;
+                using (var trx = _session.BeginTransaction())
+                {
+                    var query = _session.CreateQuery("from " + typeof(T));
+                    var records = query.List<T>();
+                    trx.Commit();
+                    return records;
+                }
+            }
+            catch(Exception err)
+            {
+                return null;
             }
         }
 
